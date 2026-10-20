@@ -1,26 +1,786 @@
-@import "tailwindcss";
+/* ============================================================
+   Dinozodiaco v3 — hoja de estilos
+   Mobile-first. Tokens y estética tomados del diseño original:
+   Fraunces (serif) + Bricolage Grotesque (UI), paleta azul noche.
+   Estrategia: estilos base para móvil, luego se enriquecen con
+   media queries @min-width (progressive enhancement).
+   ============================================================ */
 
+/* ---------- 1. Tokens ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Paleta original */
+  --navy:        #15223b;  /* fondo principal */
+  --navy-card:   #1a2946;  /* tarjetas y bloques */
+  --navy-deep:   #101b30;  /* zonas de contraste */
+  --line:        #2e4166;  /* bordes / separadores */
+  --cream:       #efe6d2;  /* texto principal claro */
+  --cream-dim:   #dcd5c6;  /* texto crema apagado */
+  --muted:       #a9b3c7;  /* texto secundario */
+  --gold:        #e0a458;  /* acento dorado */
+  --gold-soft:   #f0c38a;  /* dorado claro */
+
+  /* Tipografía */
+  --serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --ui: var(--font-bricolage), "Helvetica Neue", Helvetica, system-ui, sans-serif;
+
+  /* Escala tipográfica fluida (mobile → desktop) */
+  --fs-h1: clamp(2.75rem, 12vw, 8rem);
+  --fs-h2: clamp(2rem, 6vw, 3rem);
+  --fs-sign: clamp(1.9rem, 5vw, 2.625rem);
+  --fs-lead: clamp(1.35rem, 3.5vw, 2rem);
+  --fs-body: 1rem;
+
+  /* Layout */
+  --wrap: 1160px;
+  --gutter: clamp(1.15rem, 5vw, 3rem);
+  --radius: 12px;
+  --radius-lg: 18px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ---------- 2. Reset moderado ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--ui);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--cream);
+  background-color: var(--navy);
+  overflow-x: hidden;   /* red de seguridad contra desbordes horizontales */
+  /* textura estelar sutil, fija */
+  background-image:
+    radial-gradient(1px 1px at 18% 24%, rgba(239,230,210,.16), transparent),
+    radial-gradient(1px 1px at 72% 58%, rgba(239,230,210,.10), transparent),
+    radial-gradient(1px 1px at 42% 82%, rgba(239,230,210,.09), transparent),
+    radial-gradient(1px 1px at 88% 14%, rgba(239,230,210,.12), transparent);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration: none; }
+
+ul, ol { list-style: none; padding: 0; }
+
+button, input { font: inherit; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem; top: -3rem;
+  background: var(--gold);
+  color: var(--navy);
+  padding: .6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 100;
+  transition: top .2s ease;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- 3. Utilidades de layout ---------- */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section-head { margin-bottom: 2rem; }
+.section-head--center { text-align: center; }
+
+.section-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  color: var(--cream);
+}
+
+.kicker {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--gold);
+  margin-bottom: .5rem;
+}
+
+.eyebrow {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 3.5vw, 1.375rem);   /* hasta 22px */
+  color: var(--gold);
+}
+
+/* ---------- 4. Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .85rem 1.5rem;
+  border-radius: 999px;
+  font-family: var(--ui);
+  font-weight: 600;
+  font-size: .95rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .15s ease, background-color .15s ease,
+              border-color .15s ease, color .15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn--primary { background: var(--gold); color: var(--navy); }
+.btn--primary:hover { background: var(--gold-soft); }
+.btn--ghost { border-color: var(--line); color: var(--cream); }
+.btn--ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ---------- 5. Tags ---------- */
+.tag {
+  display: inline-block;
+  font-family: var(--ui);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  padding: .35rem .8rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+.tag--gold { color: var(--gold); }
+
+/* ============================================================
+   Barra superior
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--navy) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 60px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--cream);
+}
+.brand__mark { color: var(--gold); font-size: .9rem; }
+
+/* Nav oculto en móvil (el reloj y el logo bastan); aparece en tablet+ */
+.site-nav { display: none; }
+
+.clock {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .4rem .85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--ui);
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  transition: border-color .2s ease;
+}
+.clock.is-now { border-color: var(--gold); }
+.clock__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2.4s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(224,164,88,.55); }
+  70%  { box-shadow: 0 0 0 8px rgba(224,164,88,0); }
+  100% { box-shadow: 0 0 0 0 rgba(224,164,88,0); }
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero { padding-block: clamp(2.5rem, 8vw, 5.5rem); }
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 6vw, 3.5rem);
+}
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vw, 1.75rem);   /* 28px del original en desktop */
+  min-width: 0;   /* permite que el texto encoja en flex sin desbordar */
+}
+.hero__title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: var(--fs-h1);
+  line-height: .92;
+  letter-spacing: -.03em;   /* como el original */
+  color: var(--cream);
+  hyphens: manual;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+.hero__lead {
+  font-family: var(--serif);
+  font-size: var(--fs-lead);
+  line-height: 1.25;
+  color: var(--cream);
+  max-width: 22ch;
+}
+.hero__text {
+  font-size: 1.125rem;   /* 18px del original */
+  color: var(--cream-dim);
+  max-width: 35ch;
+}
+
+.hero__wheel {
+  order: -1;              /* en móvil la rueda va arriba del texto */
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+}
+.hero__wheel img {
+  width: min(100%, 420px);
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================================
+   Horóscopo de la semana
+   ============================================================ */
+.week {
+  background: var(--navy-deep);
+  border-block: 1px solid var(--line);
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
+}
+.week__inner { max-width: 760px; margin-inline: auto; }
+.week__dates { color: var(--muted); font-size: .9rem; margin-top: .4rem; }
+
+.chicxulub {
+  margin: 2rem auto;
+  max-width: 32ch;
+  text-align: center;
+}
+.chicxulub p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.25rem, 4vw, 1.6rem);
+  line-height: 1.4;
+  color: var(--gold);
+}
+.chicxulub::before,
+.chicxulub::after {
+  content: "☄";
+  display: block;
+  color: var(--gold);
+  opacity: .5;
+  font-size: 1rem;
+  margin: .5rem 0;
+}
+
+.week-card {
+  background: var(--navy-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 5vw, 2.4rem);
+  box-shadow: 0 24px 60px -34px rgba(0,0,0,.75);
+}
+.week-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.week-card__icon { font-size: 1.6rem; color: var(--gold); }
+.week-card__forecast {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--cream);
+  margin-bottom: 1.4rem;
+}
+.week-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+}
+.week-card__tags li {
+  font-size: .8rem;
+  color: var(--muted);
+  background: var(--navy);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .35rem .8rem;
+}
+.week__note {
+  color: var(--muted);
+  font-size: .9rem;
+  text-align: center;
+  margin-top: 1.6rem;
+}
+
+/* ============================================================
+   El ritual / la hora Chicxulub
+   ============================================================ */
+.ritual { padding-block: clamp(2.5rem, 8vw, 5.5rem); }
+.ritual__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.ritual__text {
+  color: var(--muted);
+  max-width: 54ch;
+  margin-bottom: 1.1rem;
+}
+.ritual__text strong { color: var(--cream); }
+
+.ritual__steps { display: grid; gap: 1rem; }
+.ritual-step {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  background: var(--navy-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+}
+.ritual-step__time {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  min-width: 4.6ch;
+}
+.ritual-step__time em { font-style: italic; font-size: .85rem; color: var(--muted); }
+.ritual-step__text { color: var(--cream); font-size: .93rem; }
+
+/* ============================================================
+   Cómo leer tu signo
+   ============================================================ */
+.howto {
+  background: var(--navy-deep);
+  border-top: 1px solid var(--line);
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
+}
+.howto__cols {
+  display: grid;
+  gap: 2.2rem;
+  margin-top: 1.5rem;
+}
+.howto-col__title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.deflist dt {
+  font-family: var(--ui);
+  font-weight: 700;
+  color: var(--cream);
+  margin-top: 1rem;
+  font-size: 1.02rem;
+}
+.deflist dd {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.55;
+  margin-top: .25rem;
+}
+
+/* ============================================================
+   Los doce signos
+   ============================================================ */
+.signs { padding-block: clamp(2.5rem, 7vw, 4.5rem); }
+.signs__head {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.signs__sub { color: var(--muted); max-width: 40ch; }
+
+/* Grilla estilo póster del original: celdas con bordes continuos
+   compartidos (sin gap, sin fondo por tarjeta). El borde superior e
+   izquierdo lo pone el contenedor; cada celda añade derecha + abajo. */
+.signs__grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* móvil: una columna */
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.signs__noscript {
+  color: var(--muted);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 1.2rem;
+}
+
+/* Tarjeta de signo (celda). En móvil es un flex column simple. */
+.sign {
+  --accent: var(--gold);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: clamp(1.6rem, 5vw, 2.25rem) clamp(1.4rem, 4vw, 2.125rem) clamp(1.8rem, 5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.375rem;   /* 22px del original */
+}
+
+/* Cuando hay varias columnas y el navegador soporta subgrid, cada
+   tarjeta hereda las filas de la grilla para que TODAS las tarjetas de
+   una fila alineen orbe, nombre, atributos, descripción, listas, manada,
+   facts y frase a la misma altura. Fallback: el flex de arriba. */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 37.5em) {
+    .signs__grid { grid-auto-rows: auto; }
+    .sign {
+      display: grid;
+      grid-row: span 8;
+      grid-template-rows: subgrid;
+      gap: 0;                 /* el espacio entre filas lo da la grilla */
+      row-gap: 1.375rem;
+    }
+    /* La frase reserva 2 líneas de alto para que todas las frases de la
+       fila arranquen y terminen a la misma altura, aunque unas ocupen 1
+       línea y otras 2. (line-height 1.35 × 2 ≈ 2.7em) */
+    .sign__quote { align-self: start; min-height: 2.7em; }
+  }
+}
+
+.sign__orb {
+  align-self: center;
+  width: min(220px, 62vw);
+}
+.sign__orb img,
+.sign__orb .constellation { width: 100%; height: auto; display: block; }
+
+/* Titileo sutil de las estrellas tenues de fondo (SVG inline vía JS) */
+.constellation .twinkle {
+  animation: twinkle 3.6s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: .45; }
+  50%      { opacity: .12; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .constellation .twinkle { animation: none; }
+}
+
+/* Cabecera de la tarjeta: nombre + latín + fecha, muy juntos (gap 6px) */
+.sign__head { display: flex; flex-direction: column; gap: .375rem; }
+.sign__name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: var(--fs-sign);
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  color: var(--gold);   /* el original usa dorado para todos los nombres */
+}
+.sign__latin {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.sign__dates {
+  font-family: var(--ui);
+  font-weight: 600;
+  color: var(--cream);
+  font-size: 1rem;
+  margin-top: .1rem;
+}
+
+.sign__attrs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  padding: .875rem 0;
+  border-block: 1px solid var(--line);
+}
+.attr__label,
+.meta__label,
+.facts__label {
+  display: block;
+  font-family: var(--ui);
+  font-size: .8125rem;      /* 13px del original */
+  letter-spacing: .02em;
+  color: var(--muted);
+  margin-bottom: .25rem;
+}
+.attr__value { font-family: var(--serif); color: var(--cream); font-size: 1rem; }
+
+.sign__desc {
+  color: var(--cream-dim);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.sign__lists {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.sign__lists { gap: 1rem; }
+.sign__lists > div { display: flex; flex-direction: column; gap: .5rem; }
+.sign__lists h4 {
+  font-family: var(--ui);
+  font-weight: 600;
+  font-size: .8125rem;      /* 13px */
+  letter-spacing: .02em;
+  color: var(--muted);
+}
+.sign__lists ul { display: flex; flex-direction: column; gap: .25rem; }
+.sign__lists li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--cream);
+  font-size: .9375rem;      /* 15px */
+  line-height: 1.4;
+}
+.sign__lists li::before {
+  content: "";
+  position: absolute;
+  left: .15rem; top: .55em;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.sign__manada { display: flex; flex-direction: column; gap: .25rem; }
+.sign__manada .attr__value { font-size: 1rem; }
+
+.sign__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .875rem 1rem;
+  background: var(--navy-card);   /* #1a2946 como el original */
+  border-radius: 6px;
+  padding: 1.125rem;
+}
+.facts__value {
+  color: var(--cream);
+  font-size: .9375rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--cream);
+  flex: none;
+}
+
+.sign__quote {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1.3125rem;     /* 21px del original */
+  line-height: 1.35;
+  margin-top: auto;
+}
+
+/* ============================================================
+   CTA final
+   ============================================================ */
+.cta {
+  background: var(--navy-deep);
+  border-top: 1px solid var(--line);
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
+}
+.cta__inner { max-width: 620px; margin-inline: auto; text-align: center; }
+.cta__title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  margin-bottom: .8rem;
+}
+.cta__text { color: var(--muted); max-width: 44ch; margin: 0 auto 1.8rem; }
+.cta__form {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  text-align: left;
+}
+.cta__fields {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.cta__form input:not([type="checkbox"]),
+.cta__form select {
+  width: 100%;
+  padding: .85rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--navy);
+  color: var(--cream);
+}
+.cta__form input::placeholder { color: var(--muted); }
+.cta__form input:focus,
+.cta__form select:focus { outline: none; border-color: var(--gold); }
+.cta__form select:invalid { color: var(--muted); }
+.cta__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  color: var(--muted);
+  font-size: .85rem;
+  line-height: 1.45;
+  cursor: pointer;
+}
+.cta__consent input {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: .2rem;
+  accent-color: var(--gold);
+}
+.cta__consent a { color: var(--gold); text-decoration: underline; }
+.cta__form .btn { align-self: center; }
+
+.legal {
+  max-width: 720px;
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: var(--cream-dim);
+}
+.legal h2 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--cream);
+  margin-top: .75rem;
+}
+.legal__pending { color: var(--gold); font-style: italic; }
+.cta__form .btn:disabled { opacity: .6; cursor: progress; }
+.cta__message { font-size: .92rem; }
+.cta__message--ok { color: var(--gold); }
+.cta__message--error { color: #f0a58f; text-align: center; }
+.cta__fine { color: var(--muted); font-size: .82rem; margin-top: 1.1rem; }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding-block: 2.4rem;
+}
+.site-footer__inner { text-align: center; }
+.site-footer__brand {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: .4rem;
+}
+.site-footer__brand span { color: var(--gold); }
+.site-footer__line { color: var(--muted); margin-bottom: .25rem; }
+.site-footer__fine { color: var(--muted); font-size: .82rem; }
+
+/* ============================================================
+   Breakpoints (mobile-first: se AGREGA a partir de cada ancho)
+   ============================================================ */
+
+/* --- Tablet chico: 600px --- */
+@media (min-width: 37.5em) {
+  .cta__fields { flex-direction: row; justify-content: center; }
+  .cta__fields input,
+  .cta__fields select { max-width: 280px; }
+
+  .signs__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .ritual-step__time { font-size: 1.6rem; }
+}
+
+/* --- Tablet: 768px --- */
+@media (min-width: 48em) {
+  .site-nav {
+    display: flex;
+    gap: 1.6rem;
+    margin-left: auto;
+    font-size: .92rem;
+    color: var(--muted);
+  }
+  .site-nav a:hover { color: var(--cream); }
+  .clock { margin-left: 1.5rem; }
+
+  .signs__head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .signs__sub { text-align: right; }
+
+  .howto__cols { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  /* El ritual pasa a dos columnas */
+  .ritual__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+  .ritual__copy { flex: 1 1 55%; }
+  .ritual__steps { flex: 1 1 45%; }
+}
+
+/* --- Desktop: 960px --- */
+@media (min-width: 60em) {
+  .hero__inner {
+    flex-direction: row;
+    align-items: center;
+  }
+  .hero__copy { flex: 1 1 50%; }
+  .hero__wheel { order: 0; flex: 1 1 50%; }
+  .hero__wheel img { width: min(100%, 580px); }
+
+  .signs__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 200 200" role="img" aria-label="Símbolo del Espinosaurio, constelación de Piscis">
+<circle cx="100" cy="100" r="96" fill="none" stroke="#2e4166" stroke-width="1"></circle>
+<circle cx="100" cy="100" r="88" fill="none" stroke="#2e4166" stroke-width="0.6" stroke-dasharray="2 5"></circle>
+<circle cx="90.9" cy="22.0" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="46.7" cy="103.6" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="86.4" cy="129.6" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="141.6" cy="45.8" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="57.4" cy="65.4" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="96.5" cy="149.8" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="83.6" cy="129.8" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="121.1" cy="91.4" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="130.7" cy="141.9" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="93.0" cy="126.0" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="113.9" cy="145.0" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="89.3" cy="64.2" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="119.8" cy="114.8" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="167.6" cy="112.6" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="94.4" cy="79.1" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="80.2" cy="79.2" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<path d="M 20 150 Q 30 144 40 150 T 60 150 Q 70 144 80 150 T 100 150 Q 110 144 120 150 T 140 150 Q 150 144 160 150 T 180 150" fill="none" stroke="#efe6d2" stroke-width="1" opacity="0.55"></path>
+<path d="M 20 164 Q 30 158 40 164 T 60 164 Q 70 158 80 164 T 100 164 Q 110 158 120 164 T 140 164 Q 150 158 160 164 T 180 164" fill="none" stroke="#efe6d2" stroke-width="1" opacity="0.55"></path>
+<polygon points="10,112 46,106 70,98 76,70 86,48 100,40 114,46 124,66 128,88 142,90 158,88 186,90 188,96 160,98 146,102 132,110 110,118 70,118 40,116 10,114" fill="#efe6d2" fill-opacity="0.08" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round"></polygon>
+<polyline points="100,116 104,136 116,138" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="80,118 78,136 90,138" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<circle cx="10" cy="112" r="3.2" fill="#e0a458"></circle>
+<circle cx="46" cy="106" r="2" fill="#efe6d2"></circle>
+<circle cx="70" cy="98" r="2" fill="#efe6d2"></circle>
+<circle cx="76" cy="70" r="3.2" fill="#e0a458"></circle>
+<circle cx="86" cy="48" r="2" fill="#efe6d2"></circle>
+<circle cx="100" cy="40" r="2" fill="#efe6d2"></circle>
+<circle cx="114" cy="46" r="3.2" fill="#e0a458"></circle>
+<circle cx="124" cy="66" r="2" fill="#efe6d2"></circle>
+<circle cx="128" cy="88" r="2" fill="#efe6d2"></circle>
+<circle cx="142" cy="90" r="3.2" fill="#e0a458"></circle>
+<circle cx="158" cy="88" r="2" fill="#efe6d2"></circle>
+<circle cx="186" cy="90" r="2" fill="#efe6d2"></circle>
+<circle cx="188" cy="96" r="3.2" fill="#e0a458"></circle>
+<circle cx="160" cy="98" r="2" fill="#efe6d2"></circle>
+<circle cx="146" cy="102" r="2" fill="#efe6d2"></circle>
+<circle cx="132" cy="110" r="3.2" fill="#e0a458"></circle>
+<circle cx="110" cy="118" r="2" fill="#efe6d2"></circle>
+<circle cx="70" cy="118" r="2" fill="#efe6d2"></circle>
+<circle cx="40" cy="116" r="3.2" fill="#e0a458"></circle>
+<circle cx="10" cy="114" r="2" fill="#efe6d2"></circle>
+<circle cx="116" cy="138" r="2" fill="#efe6d2"></circle>
+<circle cx="90" cy="138" r="2" fill="#efe6d2"></circle>
+</svg>

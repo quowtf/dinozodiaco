@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 200 200" role="img" aria-label="Símbolo del Estegosaurio, constelación de Virgo">
+<circle cx="100" cy="100" r="96" fill="none" stroke="#2e4166" stroke-width="1"></circle>
+<circle cx="100" cy="100" r="88" fill="none" stroke="#2e4166" stroke-width="0.6" stroke-dasharray="2 5"></circle>
+<circle cx="86.2" cy="83.4" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="100.9" cy="128.9" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="65.7" cy="30.9" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="81.4" cy="88.1" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="110.2" cy="151.3" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="39.0" cy="75.3" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="67.2" cy="90.5" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="86.7" cy="174.5" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="86.6" cy="60.4" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="114.9" cy="167.2" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="121.9" cy="114.4" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="43.0" cy="56.5" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="72.9" cy="107.1" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="134.1" cy="118.4" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="44.7" cy="49.1" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="108.7" cy="122.9" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<line x1="22" y1="160" x2="178" y2="160" stroke="#efe6d2" stroke-width="0.8" stroke-dasharray="1 4" opacity="0.5"></line>
+<polygon points="12,120 40,112 60,96 90,82 116,86 136,98 154,106 170,108 176,114 160,118 140,118 120,126 70,128 40,124 12,122" fill="#efe6d2" fill-opacity="0.08" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round"></polygon>
+<polyline points="52,100 56,82 66,94" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="66,92 74,68 84,86" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="84,84 94,62 104,84" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="104,84 114,68 120,90" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="122,90 130,78 136,98" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="22,118 12,102" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="30,116 24,100" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="126,120 128,156 138,156" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="112,124 110,156" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="80,126 82,156 92,156" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="64,126 60,156" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<circle cx="12" cy="120" r="3.2" fill="#e0a458"></circle>
+<circle cx="40" cy="112" r="2" fill="#efe6d2"></circle>
+<circle cx="60" cy="96" r="2" fill="#efe6d2"></circle>
+<circle cx="90" cy="82" r="3.2" fill="#e0a458"></circle>
+<circle cx="116" cy="86" r="2" fill="#efe6d2"></circle>
+<circle cx="136" cy="98" r="2" fill="#efe6d2"></circle>
+<circle cx="154" cy="106" r="3.2" fill="#e0a458"></circle>
+<circle cx="170" cy="108" r="2" fill="#efe6d2"></circle>
+<circle cx="176" cy="114" r="2" fill="#efe6d2"></circle>
+<circle cx="160" cy="118" r="3.2" fill="#e0a458"></circle>
+<circle cx="140" cy="118" r="2" fill="#efe6d2"></circle>
+<circle cx="120" cy="126" r="2" fill="#efe6d2"></circle>
+<circle cx="70" cy="128" r="3.2" fill="#e0a458"></circle>
+<circle cx="40" cy="124" r="2" fill="#efe6d2"></circle>
+<circle cx="12" cy="122" r="2" fill="#efe6d2"></circle>
+<circle cx="66" cy="94" r="2" fill="#efe6d2"></circle>
+<circle cx="84" cy="86" r="2" fill="#efe6d2"></circle>
+<circle cx="104" cy="84" r="2" fill="#efe6d2"></circle>
+<circle cx="120" cy="90" r="2" fill="#efe6d2"></circle>
+<circle cx="136" cy="98" r="2" fill="#efe6d2"></circle>
+<circle cx="12" cy="102" r="2" fill="#efe6d2"></circle>
+<circle cx="24" cy="100" r="2" fill="#efe6d2"></circle>
+<circle cx="138" cy="156" r="2" fill="#efe6d2"></circle>
+<circle cx="110" cy="156" r="2" fill="#efe6d2"></circle>
+<circle cx="92" cy="156" r="2" fill="#efe6d2"></circle>
+<circle cx="60" cy="156" r="2" fill="#efe6d2"></circle>
+</svg>

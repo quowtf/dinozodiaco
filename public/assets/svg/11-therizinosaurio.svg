@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 200 200" role="img" aria-label="Símbolo del Therizinosaurio, constelación de Acuario">
+<circle cx="100" cy="100" r="96" fill="none" stroke="#2e4166" stroke-width="1"></circle>
+<circle cx="100" cy="100" r="88" fill="none" stroke="#2e4166" stroke-width="0.6" stroke-dasharray="2 5"></circle>
+<circle cx="112.4" cy="61.1" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="128.0" cy="175.1" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="44.9" cy="108.3" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="104.3" cy="155.4" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="25.5" cy="99.7" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="126.5" cy="55.5" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="26.6" cy="96.6" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="86.5" cy="124.0" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="109.7" cy="46.7" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="103.8" cy="124.3" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="74.7" cy="26.6" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="92.9" cy="76.1" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="95.6" cy="32.6" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="141.0" cy="127.8" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="160.8" cy="65.0" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="91.7" cy="159.6" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<line x1="22" y1="160" x2="178" y2="160" stroke="#efe6d2" stroke-width="0.8" stroke-dasharray="1 4" opacity="0.5"></line>
+<polygon points="40,150 60,120 76,98 96,82 112,64 120,44 130,34 146,36 148,42 134,44 128,56 124,74 126,96 122,118 112,132 96,136 76,134" fill="#efe6d2" fill-opacity="0.08" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round"></polygon>
+<polyline points="120,78 140,92 150,106" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="150,106 174,118" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="150,106 170,128" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="150,106 160,134" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="106,132 112,156 124,158" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<polyline points="90,134 88,156 100,158" fill="none" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<circle cx="40" cy="150" r="3.2" fill="#e0a458"></circle>
+<circle cx="60" cy="120" r="2" fill="#efe6d2"></circle>
+<circle cx="76" cy="98" r="2" fill="#efe6d2"></circle>
+<circle cx="96" cy="82" r="3.2" fill="#e0a458"></circle>
+<circle cx="112" cy="64" r="2" fill="#efe6d2"></circle>
+<circle cx="120" cy="44" r="2" fill="#efe6d2"></circle>
+<circle cx="130" cy="34" r="3.2" fill="#e0a458"></circle>
+<circle cx="146" cy="36" r="2" fill="#efe6d2"></circle>
+<circle cx="148" cy="42" r="2" fill="#efe6d2"></circle>
+<circle cx="134" cy="44" r="3.2" fill="#e0a458"></circle>
+<circle cx="128" cy="56" r="2" fill="#efe6d2"></circle>
+<circle cx="124" cy="74" r="2" fill="#efe6d2"></circle>
+<circle cx="126" cy="96" r="3.2" fill="#e0a458"></circle>
+<circle cx="122" cy="118" r="2" fill="#efe6d2"></circle>
+<circle cx="112" cy="132" r="2" fill="#efe6d2"></circle>
+<circle cx="96" cy="136" r="3.2" fill="#e0a458"></circle>
+<circle cx="76" cy="134" r="2" fill="#efe6d2"></circle>
+<circle cx="150" cy="106" r="2" fill="#efe6d2"></circle>
+<circle cx="174" cy="118" r="2" fill="#efe6d2"></circle>
+<circle cx="170" cy="128" r="2" fill="#efe6d2"></circle>
+<circle cx="160" cy="134" r="2" fill="#efe6d2"></circle>
+<circle cx="124" cy="158" r="2" fill="#efe6d2"></circle>
+<circle cx="100" cy="158" r="2" fill="#efe6d2"></circle>
+</svg>

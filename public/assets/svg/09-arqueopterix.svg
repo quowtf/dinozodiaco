@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 200 200" role="img" aria-label="Símbolo del Arqueoptérix, constelación de Sagitario">
+<circle cx="100" cy="100" r="96" fill="none" stroke="#2e4166" stroke-width="1"></circle>
+<circle cx="100" cy="100" r="88" fill="none" stroke="#2e4166" stroke-width="0.6" stroke-dasharray="2 5"></circle>
+<circle cx="63.5" cy="113.1" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="74.6" cy="102.5" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="154.8" cy="129.5" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="153.8" cy="127.0" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="73.8" cy="78.0" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="82.3" cy="133.1" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="121.7" cy="104.2" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="92.6" cy="66.2" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="55.3" cy="83.7" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="66.9" cy="102.7" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="140.8" cy="109.4" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="100.8" cy="20.7" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="29.1" cy="62.2" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="175.4" cy="105.0" r="0.9" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="122.7" cy="107.5" r="0.7" fill="#efe6d2" opacity="0.45"></circle>
+<circle cx="85.7" cy="120.2" r="1.1" fill="#efe6d2" opacity="0.45"></circle>
+<polygon points="90,120 96,100 108,90 120,80 132,78 140,84 128,86 116,96 108,112 98,128" fill="#efe6d2" fill-opacity="0.08" stroke="#efe6d2" stroke-width="1.6" stroke-linejoin="round"></polygon>
+<polygon points="96,100 60,72 30,60 44,76 34,80 52,90 44,98 70,104 96,110" fill="#efe6d2" fill-opacity="0.06" stroke="#efe6d2" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon points="108,94 128,60 150,36 146,58 162,52 148,74 162,78 132,96 112,104" fill="#efe6d2" fill-opacity="0.06" stroke="#efe6d2" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<polygon points="96,124 80,150 88,154 98,140 100,158 108,152 104,128" fill="#efe6d2" fill-opacity="0.06" stroke="#efe6d2" stroke-width="1.4" stroke-linejoin="round"></polygon>
+<circle cx="90" cy="120" r="3.2" fill="#e0a458"></circle>
+<circle cx="96" cy="100" r="2" fill="#efe6d2"></circle>
+<circle cx="108" cy="90" r="2" fill="#efe6d2"></circle>
+<circle cx="120" cy="80" r="3.2" fill="#e0a458"></circle>
+<circle cx="132" cy="78" r="2" fill="#efe6d2"></circle>
+<circle cx="140" cy="84" r="2" fill="#efe6d2"></circle>
+<circle cx="128" cy="86" r="3.2" fill="#e0a458"></circle>
+<circle cx="116" cy="96" r="2" fill="#efe6d2"></circle>
+<circle cx="108" cy="112" r="2" fill="#efe6d2"></circle>
+<circle cx="98" cy="128" r="3.2" fill="#e0a458"></circle>
+<circle cx="96" cy="110" r="2" fill="#efe6d2"></circle>
+<circle cx="112" cy="104" r="2" fill="#efe6d2"></circle>
+<circle cx="104" cy="128" r="2" fill="#efe6d2"></circle>
+</svg>

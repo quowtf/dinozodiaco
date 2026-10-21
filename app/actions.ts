@@ -42,5 +42,5 @@ export async function subscribe(
     return { ok: false, message: "No pudimos guardar tu correo. Intenta de nuevo en un momento." };
   }
 
-  return { ok: true, message: "¡Listo! Te avisamos cuando caiga la siguiente predicción." };
+  return { ok: true, message: "¡Listo! Te avisamos de lo que sigue en Dinozodiaco." };
 }

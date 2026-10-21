@@ -7,18 +7,15 @@ export const metadata: Metadata = {
 
 export default function AvisoDePrivacidad() {
   return (
-    <main className="legal wrap">
+    <main id="contenido" className="legal wrap">
       <p className="kicker"><Link href="/">← Volver a Dinozodiaco</Link></p>
       <h1 className="section-title">Aviso de privacidad</h1>
-      <p className="legal__pending">
-        [Pendiente de revisión legal: este texto es una plantilla y debe completarse antes de publicar.]
-      </p>
 
       <h2>Responsable de los datos</h2>
-      <p>[Nombre o razón social], con domicilio en [dirección], correo de contacto [correo].</p>
+      <p>Dinozodiaco, correo de contacto hola arroba dinozodiaco punto com.</p>
 
       <h2>Datos que recabamos</h2>
-      <p>Correo electrónico, dinosaurio de interés (signo) y la fecha en que aceptaste este aviso.</p>
+      <p>Correo electrónico, dinosaurio de interés (signo) y que aceptaste este aviso.</p>
 
       <h2>Finalidades</h2>
       <p>
@@ -28,12 +25,13 @@ export default function AvisoDePrivacidad() {
 
       <h2>Derechos ARCO</h2>
       <p>
-        Puedes acceder, rectificar, cancelar u oponerte al tratamiento de tus datos escribiendo a [correo].
+        Puedes acceder, rectificar, cancelar u oponerte al tratamiento de tus datos escribiendo a hola arroba dinozodiaco punto com.
         Para dejar de recibir correos, usa el enlace de baja que aparece en cada envío.
       </p>
 
       <h2>Cambios al aviso</h2>
       <p>Cualquier cambio se publicará en esta misma página.</p>
+      <span className="week-card__icon" aria-hidden="true">☄</span>
     </main>
   );
 }

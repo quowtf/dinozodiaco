@@ -1,18 +1,22 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Fraunces } from "next/font/google";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
   style: ["normal", "italic"],
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
+  axes: ["opsz"],
 });
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
+  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -33,7 +37,12 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-MX" className={`${fraunces.variable} ${bricolage.variable}`}>
-      <body>{children}</body>
+      <body>
+        <a className="skip-link" href="#contenido">Saltar al contenido</a>
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }

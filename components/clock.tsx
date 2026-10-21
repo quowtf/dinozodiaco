@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function Clock() {
@@ -18,9 +19,9 @@ export function Clock() {
   }, []);
 
   return (
-    <a
+    <Link
       className={`clock${isNow ? " is-now" : ""}`}
-      href="#ritual"
+      href="/#ritual"
       title={
         isNow
           ? "Es la hora Chicxulub. Lo que leas ahora cae con fuerza de meteorito."
@@ -29,6 +30,6 @@ export function Clock() {
     >
       <span className="clock__dot" aria-hidden="true" />
       <span className="clock__time">{isNow ? "¡6:06!" : "6:06"}</span>
-    </a>
+    </Link>
   );
 }

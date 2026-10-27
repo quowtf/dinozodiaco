@@ -31,7 +31,7 @@
   --fs-body: 1rem;
 
   /* Layout */
-  --wrap: 1160px;
+  --wrap: 1234px;
   --gutter: clamp(1.15rem, 5vw, 3rem);
   --radius: 12px;
   --radius-lg: 18px;
@@ -95,17 +95,18 @@ button, input { font: inherit; color: inherit; }
 }
 
 .skip-link {
-  position: absolute;
-  left: 1rem; top: -3rem;
+  position: fixed;
+  left: 1rem; top: 1rem;
+  transform: translateY(-200%);
   background: var(--gold);
   color: var(--navy);
   padding: .6rem 1rem;
   border-radius: 8px;
   font-weight: 600;
   z-index: 100;
-  transition: top .2s ease;
+  transition: transform .2s ease;
 }
-.skip-link:focus { top: 1rem; }
+.skip-link:focus { transform: translateY(0); }
 
 /* ---------- 3. Utilidades de layout ---------- */
 .wrap {
@@ -519,6 +520,7 @@ button, input { font: inherit; color: inherit; }
 
 .sign__orb {
   align-self: center;
+  justify-self: center;
   width: min(220px, 62vw);
 }
 .sign__orb img,

@@ -29,13 +29,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== HORÓSCOPO DE LA SEMANA ===== */}
+      {/* ===== HORÓSCOPO DEL MES ===== */}
       <section className="week" id="semana" aria-labelledby="week-title">
         <div className="wrap week__inner">
           <header className="section-head section-head--center">
             <p className="kicker">Predicción mensual</p>
             <h2 className="section-title" id="week-title">Lo de este mes</h2>
-            <p className="week__dates">Oct · Edición nº 2</p>
+            <p className="week__dates">Octubre · Edición n.º 2</p>
           </header>
 
           <blockquote className="chicxulub">
@@ -48,15 +48,15 @@ export default function Home() {
               <span className="week-card__icon" aria-hidden="true">☄</span>
             </div>
             <p className="week-card__forecast">
-              Semana de impacto. El cielo trae ganas de empezar cosas y poca
+              Mes de impacto. El cielo trae ganas de empezar cosas y poca
               paciencia para lo que ya no sirve. Los de tierra sostienen, los de
               fuego arrancan, los de aire proponen y los de agua sienten todo al
-              doble. Si algo se va a caer, que caiga esta semana: después queda el
+              doble. Si algo se va a caer, que caiga este mes: después queda el
               terreno libre para lo nuevo. Revisa a las 6:06 de la tarde si ya cayó.
             </p>
             <ul className="week-card__tags">
               <li>☄ Energía de arranque</li>
-              <li>✦ Semana para soltar</li>
+              <li>✦ Mes para soltar</li>
               <li>◐ Revisa a las 6:06 pm</li>
             </ul>
           </article>
@@ -88,7 +88,7 @@ export default function Home() {
           <ol className="ritual__steps">
             <li className="ritual-step">
               <span className="ritual-step__time">6:06 <em>am</em></span>
-              <span className="ritual-step__text">Lees tu predicción del día.</span>
+              <span className="ritual-step__text">Lees la predicción del mes.</span>
             </li>
             <li className="ritual-step">
               <span className="ritual-step__time">6:06 <em>pm</em></span>
@@ -114,7 +114,7 @@ export default function Home() {
               <h3 className="howto-col__title">Elementos</h3>
               <dl className="deflist">
                 <dt>Fuego</dt>
-                <dd>Tiranosaurio, Braquiosaurio y Arqueoptérix. Energía, pasión y cero paciencia para lo tibio.</dd>
+                <dd>Tiranosaurio, Braquiosaurio y Arqueópterix. Energía, pasión y cero paciencia para lo tibio.</dd>
                 <dt>Tierra</dt>
                 <dd>Triceratops, Estegosaurio y Anquilosaurio. Constancia, estructura y los pies bien plantados.</dd>
                 <dt>Aire</dt>
@@ -132,7 +132,7 @@ export default function Home() {
                 <dt>Fijo</dt>
                 <dd>Triceratops, Braquiosaurio, Velociraptor y Therizinosaurio. Los que sostienen: firmes, leales y difíciles de mover.</dd>
                 <dt>Mutable</dt>
-                <dd>Celofisis, Estegosaurio, Arqueoptérix y Espinosaurio. Los que se adaptan: flexibles y listos para el cambio.</dd>
+                <dd>Celofisis, Estegosaurio, Arqueópterix y Espinosaurio. Los que se adaptan: flexibles y listos para el cambio.</dd>
               </dl>
             </div>
 
@@ -140,11 +140,11 @@ export default function Home() {
               <h3 className="howto-col__title">Eras regentes</h3>
               <dl className="deflist">
                 <dt>Triásico</dt>
-                <dd>Hace 252 a 201 millones de años. Los pioneros, los primeros en salir a escena.</dd>
+                <dd>Hace entre 252 y 201 millones de años. Los pioneros, los primeros en salir a escena.</dd>
                 <dt>Jurásico</dt>
-                <dd>Hace 201 a 145 millones de años. Los gigantes de cuello largo y los que aprendieron a volar.</dd>
+                <dd>Hace entre 201 y 145 millones de años. Los gigantes de cuello largo y los que aprendieron a volar.</dd>
                 <dt>Cretácico</dt>
-                <dd>Hace 145 a 66 millones de años. La era más diversa, y la de los dinosaurios más famosos.</dd>
+                <dd>Hace entre 145 y 66 millones de años. La era más diversa, y la de los dinosaurios más famosos.</dd>
               </dl>
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function Home() {
             Cada mes una predicción nueva. Déjanos tu correo y te mandamos la siguiente.
           </p>
           <SubscribeForm />
-          <p className="cta__fine">Sin spam. Solo dinosaurios y predicciones una vez por mes. Y avisos cuando este lista la merch.</p>
+          <p className="cta__fine">Sin spam. Solo dinosaurios y predicciones una vez por mes. Y avisos cuando la merch esté lista.</p>
         </div>
       </section>
     </main>

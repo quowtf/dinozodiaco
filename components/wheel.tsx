@@ -7,7 +7,7 @@ const WHEEL_SIGNS = [
   { slug: "06-estegosaurio", nombre: "Estegosaurio", constelacion: "Virgo", x: 384, y: 456.1 },
   { slug: "07-diplodoco", nombre: "Diplodoco", constelacion: "Libra", x: 280, y: 484 },
   { slug: "08-velociraptor", nombre: "Velociraptor", constelacion: "Escorpio", x: 176, y: 456.1 },
-  { slug: "09-arqueopterix", nombre: "Arqueoptérix", constelacion: "Sagitario", x: 99.9, y: 380 },
+  { slug: "09-arqueopterix", nombre: "Arqueópterix", constelacion: "Sagitario", x: 99.9, y: 380 },
   { slug: "10-anquilosaurio", nombre: "Anquilosaurio", constelacion: "Capricornio", x: 72, y: 276 },
   { slug: "11-therizinosaurio", nombre: "Therizinosaurio", constelacion: "Acuario", x: 99.9, y: 172 },
   { slug: "12-espinosaurio", nombre: "Espinosaurio", constelacion: "Piscis", x: 176, y: 95.9 },

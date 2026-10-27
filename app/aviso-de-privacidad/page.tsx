@@ -12,10 +12,10 @@ export default function AvisoDePrivacidad() {
       <h1 className="section-title">Aviso de privacidad</h1>
 
       <h2>Responsable de los datos</h2>
-      <p>Dinozodiaco, correo de contacto hola arroba dinozodiaco punto com.</p>
+      <p>Dinozodiaco. Correo de contacto: hola arroba dinozodiaco punto com.</p>
 
       <h2>Datos que recabamos</h2>
-      <p>Correo electrónico, dinosaurio de interés (signo) y que aceptaste este aviso.</p>
+      <p>Correo electrónico, dinosaurio de interés (signo) y aceptación de este aviso.</p>
 
       <h2>Finalidades</h2>
       <p>

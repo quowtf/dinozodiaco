@@ -39,8 +39,8 @@ export function SubscribeForm() {
       <label className="cta__consent">
         <input type="checkbox" name="privacidad" value="si" required />
         <span>
-          Acepto el <a href="/aviso-de-privacidad">aviso de privacidad</a> y que
-          mi correo se use para enviarme las predicciones.
+          Acepto el <a href="/aviso-de-privacidad">aviso de privacidad</a> y el uso
+          de mi correo para enviarme las predicciones.
         </span>
       </label>
 

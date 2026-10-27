@@ -280,10 +280,35 @@ button, input { font: inherit; color: inherit; }
   min-width: 0;
   max-width: 100%;
 }
-.hero__wheel img {
+.hero__wheel svg {
   width: min(100%, 420px);
   max-width: 100%;
   height: auto;
+}
+
+.wheel-sign {
+  cursor: pointer;
+}
+.wheel text {
+  font-family: var(--serif);
+}
+.wheel-sign text {
+  transition: fill 160ms ease;
+}
+.wheel-sign:hover .wheel-sign__name,
+.wheel-sign:focus-visible .wheel-sign__name {
+  fill: var(--gold);
+}
+.wheel-sign:hover .wheel-sign__constelacion,
+.wheel-sign:focus-visible .wheel-sign__constelacion {
+  fill: var(--cream);
+}
+.wheel-sign:focus {
+  outline: none;
+}
+.wheel-sign:focus-visible {
+  outline: 1px dashed var(--gold);
+  outline-offset: 4px;
 }
 
 /* ============================================================
@@ -462,6 +487,7 @@ button, input { font: inherit; color: inherit; }
 /* Tarjeta de signo (celda). En móvil es un flex column simple. */
 .sign {
   --accent: var(--gold);
+  scroll-margin-top: 80px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   padding: clamp(1.6rem, 5vw, 2.25rem) clamp(1.4rem, 4vw, 2.125rem) clamp(1.8rem, 5vw, 2.5rem);
@@ -780,7 +806,7 @@ button, input { font: inherit; color: inherit; }
   }
   .hero__copy { flex: 1 1 50%; }
   .hero__wheel { order: 0; flex: 1 1 50%; }
-  .hero__wheel img { width: min(100%, 580px); }
+  .hero__wheel svg { width: min(100%, 580px); }
 
   .signs__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

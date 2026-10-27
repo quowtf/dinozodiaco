@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { SignCard } from "@/components/sign-card";
+import { DinoWheel } from "@/components/wheel";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { SIGNOS } from "@/data/signos";
 
@@ -24,13 +24,7 @@ export default function Home() {
           </div>
 
           <div className="hero__wheel">
-            <Image
-              src="/assets/svg/wheel.svg"
-              alt="Rueda del Dinozodiaco con los doce signos ordenados en círculo"
-              width={560}
-              height={560}
-              priority
-            />
+            <DinoWheel />
           </div>
         </div>
       </section>

@@ -7,6 +7,7 @@ export async function SignCard({ signo: s }: { signo: Signo }) {
 
   return (
     <article
+      id={s.slug}
       className="sign"
       style={{ "--accent": s.accent } as CSSProperties}
     >

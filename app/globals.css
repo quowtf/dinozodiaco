@@ -487,7 +487,6 @@ button, input { font: inherit; color: inherit; }
 
 /* Tarjeta de signo (celda). En móvil es un flex column simple. */
 .sign {
-  --accent: var(--gold);
   scroll-margin-top: 80px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -506,7 +505,7 @@ button, input { font: inherit; color: inherit; }
     .signs__grid { grid-auto-rows: auto; }
     .sign {
       display: grid;
-      grid-row: span 8;
+      grid-row: span 9;
       grid-template-rows: subgrid;
       gap: 0;                 /* el espacio entre filas lo da la grilla */
       row-gap: 1.375rem;
@@ -619,7 +618,7 @@ button, input { font: inherit; color: inherit; }
   left: .15rem; top: .55em;
   width: 5px; height: 5px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--gold);
 }
 
 .sign__manada { display: flex; flex-direction: column; gap: .25rem; }
@@ -650,11 +649,21 @@ button, input { font: inherit; color: inherit; }
 .sign__quote {
   font-family: var(--serif);
   font-style: italic;
-  color: var(--accent);
+  color: var(--gold);
   font-size: 1.3125rem;     /* 21px del original */
   line-height: 1.35;
   margin-top: auto;
 }
+
+/* Botón de descarga/compartir de la tarjeta base */
+.sign__share {
+  width: 100%;
+  gap: .5rem;
+  padding-block: .7rem;
+  font-size: .875rem;
+}
+.sign__share svg { flex: none; }
+.sign__share[aria-busy="true"] { opacity: .7; cursor: progress; }
 
 /* ============================================================
    CTA final

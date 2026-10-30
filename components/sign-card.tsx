@@ -1,16 +1,12 @@
-import type { CSSProperties } from "react";
 import { getConstelacion } from "@/lib/constelacion";
+import { ShareCardButton } from "@/components/share-card-button";
 import type { Signo } from "@/data/signos";
 
 export async function SignCard({ signo: s }: { signo: Signo }) {
   const orb = await getConstelacion(s.slug);
 
   return (
-    <article
-      id={s.slug}
-      className="sign"
-      style={{ "--accent": s.accent } as CSSProperties}
-    >
+    <article id={s.slug} className="sign">
       <div className="sign__orb" dangerouslySetInnerHTML={{ __html: orb }} />
 
       <div className="sign__head">
@@ -65,6 +61,8 @@ export async function SignCard({ signo: s }: { signo: Signo }) {
       </div>
 
       <p className="sign__quote">“{s.frase}”</p>
+
+      <ShareCardButton src={s.tarjeta} nombre={s.nombre} slug={s.slug} />
     </article>
   );
 }

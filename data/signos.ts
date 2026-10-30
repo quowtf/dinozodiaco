@@ -1,6 +1,7 @@
 export interface Signo {
   slug: string;
   nombre: string;
+  tarjeta: string;
   latin: string;
   constelacion: string;
   fechas: string;
@@ -22,6 +23,7 @@ export interface Signo {
 export const SIGNOS: Signo[] = [
   {
     slug: "01-tiranosaurio", nombre: "Tiranosaurio", latin: "Tyrannosaurus rex",
+    tarjeta: "/assets/tarjetas/Tiranosaurio.png",
     constelacion: "Aries", fechas: "Del 21 de marzo al 19 de abril",
     elemento: "Fuego", modalidad: "Cardinal", era: "Cretácico",
     desc: "Entras a cualquier lugar como si fuera tu territorio, y casi siempre lo es. Tienes energía de arranque: decides rápido, actúas más rápido y convences con puro impulso. Tus brazos serán cortos, pero tu ambición llega lejos.",
@@ -34,6 +36,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "02-triceratops", nombre: "Triceratops", latin: "Triceratops horridus",
+    tarjeta: "/assets/tarjetas/Triceratops.png",
     constelacion: "Tauro", fechas: "Del 20 de abril al 20 de mayo",
     elemento: "Tierra", modalidad: "Fijo", era: "Cretácico",
     desc: "Firme, leal y con tres cuernos listos para defender lo que amas. No te gusta que te apuren ni que te muevan de tu lugar favorito. Disfrutas lo bueno: comida rica, siestas largas y gente que no cambia los planes a última hora.",
@@ -46,6 +49,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "03-celofisis", nombre: "Celofisis", latin: "Coelophysis bauri",
+    tarjeta: "/assets/tarjetas/Celofisis.png",
     constelacion: "Géminis", fechas: "Del 21 de mayo al 20 de junio",
     elemento: "Aire", modalidad: "Mutable", era: "Triásico",
     desc: "Nunca andas solo. Del celofisis se han encontrado cientos de fósiles juntos, y tú también vives en manada: conversaciones, ideas nuevas y chismes de buena fuente. Eres ágil, curioso y cambias de tema a la velocidad de tus patas.",
@@ -58,6 +62,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "04-maiasaura", nombre: "Maiasaura", latin: "Maiasaura peeblesorum",
+    tarjeta: "/assets/tarjetas/Maiasaura.png",
     constelacion: "Cáncer", fechas: "Del 21 de junio al 22 de julio",
     elemento: "Agua", modalidad: "Cardinal", era: "Cretácico",
     desc: "Su nombre significa \u201clagarto buena madre\u201d y te queda a la medida. Cuidas tu nido, recuerdas cumpleaños y siempre hay lugar en tu casa para quien necesita refugio. Por fuera eres suave, y tu memoria emocional es de otra era.",
@@ -70,6 +75,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "05-braquiosaurio", nombre: "Braquiosaurio", latin: "Brachiosaurus altithorax",
+    tarjeta: "/assets/tarjetas/Braquiosaurio.png",
     constelacion: "Leo", fechas: "Del 23 de julio al 22 de agosto",
     elemento: "Fuego", modalidad: "Fijo", era: "Jurásico",
     desc: "Llevas la cabeza en alto y todos voltean hacia arriba para verte. Tienes presencia, generosidad y un corazón del tamaño de tu cuello. Te encanta brillar, pero también compartes tu sombra con quien la necesita.",
@@ -82,6 +88,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "06-estegosaurio", nombre: "Estegosaurio", latin: "Stegosaurus stenops",
+    tarjeta: "/assets/tarjetas/Estegosaurio.png",
     constelacion: "Virgo", fechas: "Del 23 de agosto al 22 de septiembre",
     elemento: "Tierra", modalidad: "Mutable", era: "Jurásico",
     desc: "Tus placas están alineadas y tu agenda también. Analizas, organizas y encuentras el error que nadie más vio. Ayudas sin que te lo pidan, aunque a veces tu cola de picos sale a corregir de más.",
@@ -94,6 +101,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "07-diplodoco", nombre: "Diplodoco", latin: "Diplodocus carnegii",
+    tarjeta: "/assets/tarjetas/Diplodoco.png",
     constelacion: "Libra", fechas: "Del 23 de septiembre al 22 de octubre",
     elemento: "Aire", modalidad: "Cardinal", era: "Jurásico",
     desc: "Tu cuello y tu cola se equilibran como una balanza, y así llevas tu vida. Buscas armonía, huyes de los pleitos y tu buen gusto se nota a kilómetros. Tardas en decidir, pero cuando lo haces, todo cuadra.",
@@ -106,6 +114,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "08-velociraptor", nombre: "Velociraptor", latin: "Velociraptor mongoliensis",
+    tarjeta: "/assets/tarjetas/Velociraptor.png",
     constelacion: "Escorpio", fechas: "Del 23 de octubre al 21 de noviembre",
     elemento: "Agua", modalidad: "Fijo", era: "Cretácico",
     desc: "Eres más pequeño de lo que cuentan las películas y más listo de lo que la gente sospecha. Observas en silencio, estudias cada movimiento y actúas en el momento exacto. Tu garra en forma de hoz es tu intuición: rara vez falla.",
@@ -118,6 +127,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "09-arqueopterix", nombre: "Arqueópterix", latin: "Archaeopteryx lithographica",
+    tarjeta: "/assets/tarjetas/Arqueopterix.png",
     constelacion: "Sagitario", fechas: "Del 22 de noviembre al 21 de diciembre",
     elemento: "Fuego", modalidad: "Mutable", era: "Jurásico",
     desc: "Fuiste de los primeros en intentar volar, y todavía no aterrizas. Te mueven la aventura, los viajes y las preguntas grandes. Tu optimismo contagia, y tu honestidad a veces cae sin paracaídas.",
@@ -130,6 +140,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "10-anquilosaurio", nombre: "Anquilosaurio", latin: "Ankylosaurus magniventris",
+    tarjeta: "/assets/tarjetas/Anquilosaurio.png",
     constelacion: "Capricornio", fechas: "Del 22 de diciembre al 19 de enero",
     elemento: "Tierra", modalidad: "Cardinal", era: "Cretácico",
     desc: "Tienes armadura, disciplina y una cola en forma de mazo para cuando alguien se pasa de listo. Construyes a largo plazo, subes la montaña paso a paso y no te distraen las modas. Cuando por fin te relajas, eres el más divertido del grupo.",
@@ -142,6 +153,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "11-therizinosaurio", nombre: "Therizinosaurio", latin: "Therizinosaurus cheloniformis",
+    tarjeta: "/assets/tarjetas/Therizinosaurio.png",
     constelacion: "Acuario", fechas: "Del 20 de enero al 18 de febrero",
     elemento: "Aire", modalidad: "Fijo", era: "Cretácico",
     desc: "Vienes de una familia de carnívoros y decidiste comer plantas. Así eres: original, independiente y siempre un paso adelante de lo que el resto considera normal. Tus garras de casi un metro asustan, pero las usas para alcanzar ideas, no para pelear.",
@@ -154,6 +166,7 @@ export const SIGNOS: Signo[] = [
   },
   {
     slug: "12-espinosaurio", nombre: "Espinosaurio", latin: "Spinosaurus aegyptiacus",
+    tarjeta: "/assets/tarjetas/Espinosaurio.png",
     constelacion: "Piscis", fechas: "Del 19 de febrero al 20 de marzo",
     elemento: "Agua", modalidad: "Mutable", era: "Cretácico",
     desc: "Vives entre dos mundos, igual que el espinosaurio, que pasaba buena parte de su vida en el agua. Eres soñador, creativo y sientes todo al doble. Tu vela es tu imaginación: grande, visible y lista para llevarte a donde sople el viento.",

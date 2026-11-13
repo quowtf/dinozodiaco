@@ -78,7 +78,9 @@ pnpm predicciones:setup
 ### Flujo mensual
 
 1. **Antes del día 25** te llega el texto de las predicciones del mes siguiente. El
-   formato está en [`docs/PREDICCIONES.md`](docs/PREDICCIONES.md).
+   formato está en [`docs/PREDICCIONES.md`](docs/PREDICCIONES.md), y hay un
+   ejemplo completo y válido en
+   [`docs/EJEMPLO-PREDICCION.json`](docs/EJEMPLO-PREDICCION.json).
 2. Si te lo mandan como JSON:
 
    ```bash
@@ -96,6 +98,22 @@ pnpm predicciones:setup
 
 3. La home muestra la predicción general en menos de 5 minutos (revalidación automática).
 4. El día 1 a las 18:06 salen los 12 correos solos.
+
+### Rotar el CRON_SECRET
+
+Vercel y GitHub solo permiten **escribir** secretos, no leerlos. Por eso el
+valor se genera en tu máquina y se pega en los dos lados:
+
+```bash
+pnpm predicciones:rotar
+```
+
+El script imprime el valor nuevo y los pasos exactos. Después de pegarlo en
+Vercel y en GitHub:
+
+1. **Redeploy en Vercel** (Deployments → ⋯ → Redeploy). Vercel congela las
+   variables en cada deploy: sin redeploy el secret viejo sigue vivo.
+2. `pnpm predicciones:verificar` — dice si los dos lados coinciden.
 
 ### Probar sin enviar nada
 
@@ -141,7 +159,10 @@ lib/email-prediccion.ts                HTML y texto plano del correo (sin imagen
 scripts/setup-resend.ts                setup idempotente de Resend
 scripts/predicciones.ts                CLI: validar / subir / ver
 scripts/ensamblar-predicciones.ts      convierte textos sueltos en JSON
+scripts/rotar-cron-secret.ts            genera un CRON_SECRET nuevo
+scripts/verificar-cron.ts               comprueba que Vercel y GitHub coinciden
 docs/PREDICCIONES.md                   formato que se le pide al tercero
+docs/EJEMPLO-PREDICCION.json           ejemplo completo de un mes (12 signos)
 docs/PLAN-ENVIO-MENSUAL.md             plan de implementacion
 ```
 

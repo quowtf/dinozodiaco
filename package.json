@@ -11,7 +11,9 @@
     "predicciones:validar": "tsx scripts/predicciones.ts validar",
     "predicciones:subir": "tsx scripts/predicciones.ts subir",
     "predicciones:ver": "tsx scripts/predicciones.ts ver",
-    "predicciones:ensamblar": "tsx scripts/ensamblar-predicciones.ts"
+    "predicciones:ensamblar": "tsx scripts/ensamblar-predicciones.ts",
+    "predicciones:verificar": "tsx scripts/verificar-cron.ts",
+    "predicciones:rotar": "tsx scripts/rotar-cron-secret.ts"
   },
   "dependencies": {
     "next": "16.4.2",

@@ -1,0 +1,111 @@
+{
+  "mes": "2026-12",
+  "edicion": 3,
+  "general": {
+    "titulo": "Suelo libre para lo nuevo",
+    "texto": "El cielo trae ganas de empezar cosas y poca paciencia para lo que ya no sirve. Si algo se va a caer, que caiga este mes: después queda el terreno libre para lo nuevo. Los de tierra sostienen, los de fuego arrancan, los de aire proponen y los de agua sienten todo al doble. Revisa a las 6:06 de la tarde si ya cayó.",
+    "tags": [
+      "Energía de arranque",
+      "Mes para soltar",
+      "Revisa a las 6:06 pm"
+    ]
+  },
+  "signos": {
+    "01-tiranosaurio": {
+      "titulo": "El rugido tiene fecha",
+      "texto": "Llevas semanas anunciando que algo ibas a empezar y no empezaste. Este mes el cuerpo te gana: arranca aunque sea feo y a medias. La fila nunca fue tuya, aunque la habías adoptado por costumbre. Nadie te va a regalar el permiso, así que deja de esperarlo y da el primer paso hoy.",
+      "tags": [
+        "Arranca ya",
+        "Cero filas"
+      ]
+    },
+    "02-triceratops": {
+      "titulo": "Terco, pero a tiempo",
+      "texto": "Tu testarudo de siempre sabe cosas que los demás no. Esta vez la terquedad te salva: hay algo que va a cambiar y solo lo vas a aceptar si alguien te lo explica tres veces. No es que cambies de opinión, es que por fin te llega la información que necesitabas para decidir bien.",
+      "tags": [
+        "Paciencia",
+        "Cabezazo"
+      ]
+    },
+    "03-celofisis": {
+      "titulo": "Tres chismes y una idea buena",
+      "texto": "Tu cabeza no para y este mes eso juega a favor: entre tanto chisme hay una idea que resuelve el problema que traías desde hace semanas. Filtra. Lo que te dicen los demás es insumo, no instrucción. Salir a caminar sin el teléfono te va a costar, pero ahí aparece lo bueno.",
+      "tags": [
+        "Filtra el ruido",
+        "Camina sin teléfono"
+      ]
+    },
+    "04-maiasaura": {
+      "titulo": "Nido con la puerta abierta",
+      "texto": "Alguien que quieres va a necesitarte esta semana, aunque no lo pida. Este mes tu instinto protector está afinado y no vas a saber que lo tenías hasta que alguien te lo agradezca. Cuidado con confundir el cuidado con el exceso: dar sin que te lo pidan está bien, dar para no sentirte solo no tanto.",
+      "tags": [
+        "Alguien te necesita",
+        "Distingue amor de culpa"
+      ]
+    },
+    "05-braquiosaurio": {
+      "titulo": "El cuello largo ve más lejos",
+      "texto": "Llevas meses mirando el horizonte esperando que algo cambie y el cambio estaba en tu propio alcance, a dos pasos. Este mes te levantas y te das cuenta de que puedes más de lo que creías, y que lo que te frenaba era el tamaño de tu idea, no el del dinosaurio. Sé generoso con lo que sabes: alguien cerca no tiene tus años.",
+      "tags": [
+        "Mira más alto",
+        "Comparte lo que sabes"
+      ]
+    },
+    "06-estegosaurio": {
+      "titulo": "Orden antes que velocidad",
+      "texto": "Tu placa es tu superpoder, no tu estorbo. Este mes lo que viene desordenado te pone nervioso y por eso vas a querer arreglarlo todo antes de que llegue. Resiste el impulso: una sola cosa bien hecha te deja mejor parado que cinco a medias. Al final tu método siempre gana, aunque no te guste esperar.",
+      "tags": [
+        "Una cosa bien hecha",
+        "Tu método gana"
+      ]
+    },
+    "07-diplodoco": {
+      "titulo": "Dos caras, un balance",
+      "texto": "Este mes vas a ver dos versiones de la misma situación y las dos van a ser ciertas, porque son tuyas. Elegir una implica cerrar la otra, y eso incomoda a alguien que te quiere. No se trata de decidir mal: se trata de decidir. Tu paz depende de eso, y el mes te pide que la elijas.",
+      "tags": [
+        "Decide y cierra",
+        "Tu paz primero"
+      ]
+    },
+    "08-velociraptor": {
+      "titulo": "El ataque con tiempo",
+      "texto": "Tu garra en forma de hoz no falla, lo que falla es el momento. Este mes vas a tener la oportunidad delante y la tentación de adelantarla. Espera. Lo que preparaste llega intacto si le das dos días más. Quien te subestima cuenta con tu impaciencia, no con tu garra.",
+      "tags": [
+        "Espera dos días",
+        "Tu garra acierta"
+      ]
+    },
+    "09-arqueopterix": {
+      "titulo": "Todavía no aterrizas",
+      "texto": "Estar entre dos cosas no es mala idea, es tu manera de volar. Este mes te van a pedir que elijas un ramo y tu cabeza va a decir que ninguno es el tuyo. Los dos lo son, pero no a la vez. Elige el que puedes sostener seis meses y deja el otro para después. El cielo no se acaba.",
+      "tags": [
+        "Elige un ramo",
+        "El cielo no se acaba"
+      ]
+    },
+    "10-anquilosaurio": {
+      "titulo": "El mazo quieto",
+      "texto": "Tu armadura tiene un problema: no avisa cuando algo ya te pegó. Este mes va a doler más de lo que esperabas, y va a ser por algo que ya venía sonando desde hace tiempo. No te escudes: no se trata de que te duela, se trata de que te enteres. Lo que viene es una lección que solo se aprende andando, y ya la empezaste.",
+      "tags": [
+        "Enterate a tiempo",
+        "Blindado por fuera"
+      ]
+    },
+    "11-therizinosaurio": {
+      "titulo": "Rareza con mercado",
+      "texto": "Lo raro que haces tiene público y este mes se nota. Te van a ofrecer algo que no esperabas, con la tentación de sentirte raro otra vez. Acepta. Tu rareza nunca fue el problema, era el formato chico. Este mes hay algo más grande donde tu rareza encaja mejor de lo que imaginas.",
+      "tags": [
+        "Acepta lo raro",
+        "Encajas en algo más grande"
+      ]
+    },
+    "12-espinosaurio": {
+      "titulo": "Entre dos mundos, en calma",
+      "texto": "Vives en dos mundos y los dos te quedan bien. Este mes te toca elegir por cuál te identificas un rato más, y la respuesta cambia según la hora del día. No es indecisión, es que no te cabe en una sola forma. Concedes que lo que sientes es real, aunque lo que sientes también se vive en el agua.",
+      "tags": [
+        "Dos mundos, un día",
+        "Lo que sientes es real"
+      ]
+    }
+  }
+}

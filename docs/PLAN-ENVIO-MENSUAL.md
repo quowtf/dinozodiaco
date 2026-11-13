@@ -434,6 +434,8 @@ Reglas de `emailHtml`:
 
 #### Tarea 6 — Script de setup de Resend (properties, topics, segments) + backfill
 
+> **Nota de ejecucion (2026-11-12):** los scripts usan `tsx` (devDependency) porque resuelven los alias `@/*` de tsconfig, que `node --experimental-strip-types` no resuelve. `package.json` no lleva `pnpm.onlyBuiltDependencies`: pnpm 11 lo lee de `pnpm-workspace.yaml` (`allowBuilds.esbuild: true`).
+
 **Archivos (solo estos):** `scripts/setup-resend.ts` (crear), `package.json` (editar solo para añadir el script `"predicciones:setup": "tsx scripts/setup-resend.ts"`)
 **Depende de:** Tarea 3 (`lib/resend.ts`).
 **No toca:** `app/actions.ts`.

@@ -23,10 +23,22 @@ export default function AvisoDePrivacidad() {
         tus datos con terceros para fines comerciales.
       </p>
 
+      <h2>Frecuencia</h2>
+      <p>
+        Un correo al mes, el día 1 a las 18:06 (hora de Ciudad de México). Sin más.
+      </p>
+
+      <h2>Proveedores</h2>
+      <p>
+        Resend (envío de correo) y Upstash Redis (almacenamiento del contenido de las predicciones).
+        No vendemos ni cedemos tus datos.
+      </p>
+
       <h2>Derechos ARCO</h2>
       <p>
         Puedes acceder, rectificar, cancelar u oponerte al tratamiento de tus datos escribiendo a hola arroba dinozodiaco punto com.
-        Para dejar de recibir correos, usa el enlace de baja que aparece en cada envío.
+        Para dejar de recibir correos, usa el enlace de baja que aparece en cada envío. Ese enlace permite
+        darte de baja de las predicciones mensuales y de los avisos de la tienda por separado.
       </p>
 
       <h2>Cambios al aviso</h2>

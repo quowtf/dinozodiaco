@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "predicciones:setup": "tsx scripts/setup-resend.ts",
+    "predicciones:validar": "tsx scripts/predicciones.ts validar",
+    "predicciones:subir": "tsx scripts/predicciones.ts subir",
+    "predicciones:ver": "tsx scripts/predicciones.ts ver",
+    "predicciones:ensamblar": "tsx scripts/ensamblar-predicciones.ts"
   },
   "dependencies": {
     "next": "16.4.2",
@@ -20,6 +25,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   },
   "packageManager": "pnpm@11.9.0"

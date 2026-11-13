@@ -1,0 +1,50 @@
+name: Envío mensual de predicciones
+
+# El cron dispara cada 15 minutos. La app decide si está en la ventana de
+# envío (PREDICCIONES_HORA del día PREDICCIONES_DIA, hora de Ciudad de México)
+# y deduplica con la key `enviado:{mes}` de Upstash. Por eso cambiar la hora
+# de envío es cambiar una env en Vercel, no este archivo.
+#
+# El cron de GitHub Actions corre en UTC: 18:06 en Ciudad de México es
+# 00:06 UTC del día siguiente.
+#
+# El repo es público -> GitHub Actions no consume minutos de plan pagado.
+
+on:
+  schedule:
+    - cron: "6,21,36,51 * * * *"
+  workflow_dispatch:
+    inputs:
+      mes:
+        description: "Mes a enviar (YYYY-MM). Vacío = mes actual."
+        required: false
+        type: string
+      force:
+        description: "Forzar envío aunque ya se haya enviado ese mes"
+        required: false
+        default: "false"
+        type: string
+
+# Dos corridas no se pisan: si GitHub retrasa y solapa, la segunda espera.
+concurrency:
+  group: envio-predicciones
+  cancel-in-progress: false
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enviar predicciones
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          MES: ${{ inputs.mes }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          set -euo pipefail
+          args=(-sS -X POST "$SITE_URL/api/cron/predicciones" \
+                -H "Authorization: Bearer $CRON_SECRET" \
+                -H "Content-Type: application/json")
+          if [ -n "${MES:-}" ]; then args+=(-d "{\"mes\":\"$MES\"}"); fi
+          if [ "${FORCE:-false}" = "true" ]; then args+=(-d '{"force":true}'); fi
+          curl "${args[@]}"

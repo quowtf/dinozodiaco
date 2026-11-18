@@ -1,152 +1,123 @@
 # Predicciones mensuales de Dinozodiaco
 
-Este documento es todo lo que necesitas saber para escribir las predicciones de un mes.
-No tienes que saber programar. Hay dos formatos aceptados: **JSON** (preferido) o **textos sueltos**.
+Todo lo que hay que saber para escribir un mes. No hace falta saber programar.
 
 ---
 
 ## 1. De qué va
 
 Dinozodiaco es un horóscopo donde los doce signos son dinosaurios. Cada mes sale una
-predicción nueva: una general para todos y una distinta para cada uno de los doce signos.
-Todo eso se manda por correo el día 1 de cada mes.
+predicción nueva: una distinta para cada signo, que se manda por correo el día 1.
+
+La predicción general del mes es aparte: va **solo en el sitio web**, no en el correo.
 
 Tono: burlón pero cariñoso, en español de México. Como un amigo que sabe de ti.
 Cero misticismo serio, cero predicciones del fin del mundo.
 
-Reglas del proyecto, por si te las preguntan:
-
-- Ningún paleontólogo fue consultado para predecir tu futuro.
-- Hecho por diversión, con amor y con IA.
-- La hora oficial es las 6:06 (la hora Chicxulub).
-
 ---
 
-## 2. Formato JSON (preferido)
-
-Un solo archivo JSON por mes. Ejemplo completo y válido (los textos son de muestra,
-cámbialos):
+## 2. Formato: un archivo JSON por mes
 
 ```json
 {
-  "mes": "2026-12",
-  "edicion": 3,
-  "general": {
-    "titulo": "Suelo libre para lo nuevo",
-    "texto": "El cielo trae ganas de empezar cosas y poca paciencia para lo que ya no sirve. Este mes cae lo viejo y queda el terreno libre para lo nuevo. Revisa a las 6:06 de la tarde si ya se cumplió.",
-    "tags": ["Energía de arranque", "Mes para soltar"]
-  },
-  "signos": {
-    "01-tiranosaurio": {
-      "titulo": "El rugido tiene fecha",
-      "texto": "Llevas semanas anunciando que algo ibas a empezar y no empezaste. Este mes el cuerpo te gana: arranca, aunque sea feo y a medias. La fila no es tuya y nunca lo fue.",
-      "tags": ["Arranca ya", "Cero filas"]
-    },
-    "02-triceratops": {
-      "titulo": "Terco, pero a tiempo",
-      "texto": "Tu testarudo de siempre sabe cosas que los demás no. Esta vez la terquedad te salva: hay algo que va a cambiar y solo lo vas a aceptar si alguien te lo explica tres veces.",
-      "tags": ["Paciencia", "Cabezazo"]
+  "titulo": "Predicciones de diciembre 2026",
+  "marca": "Dinozodiaco",
+  "mes": "diciembre",
+  "anio": 2026,
+  "signos": [
+    {
+      "orden": 1,
+      "dinosaurio": "Tiranosaurio",
+      "fechas": "21 de marzo al 19 de abril",
+      "intro": "Diciembre te pide cerrar el año con la presa en la boca. Lo que soltaste en noviembre ahora se convierte en impulso.",
+      "tech": "Ese proyecto que arrastraste todo el año por fin entra en su última semana. Ciérralo, aunque no esté perfecto.",
+      "manada": "Vas a tener una conversación que venías evitando desde octubre. Después del 20, todo se acomoda.",
+      "plata": "El dinero que apartaste a mitad de año se convierte en el regalo que de verdad quieres dar.",
+      "hobby": "Tu hobby vuelve a ser juego cuando dejas de medirlo por resultados.",
+      "tu_superpoder": "Cerrar ciclos. Sabes cuándo algo terminó y no miras atrás.",
+      "tu_rabbit_hole": "Sue, el tiranosaurio más completo del mundo, está en Chicago. Lleva el nombre de quien lo encontró.",
+      "fosil_de_la_suerte": "Huella de terópodo. Dejas marca por donde pasas."
     }
-  }
+  ]
 }
 ```
 
-**Ese ejemplo está incompleto a propósito**: el JSON final necesita los **12** signos.
-Los que faltan en el ejemplo (del `03-celofisis` al `12-espinosaurio`) los escribes tú.
+El ejemplo está incompleto a propósito: el archivo real lleva los **12** signos.
 
-### Los 12 signos y sus slugs
+### Los 12 signos
 
-El `slug` es la clave exacta dentro de `"signos"`. Cópiala tal cual:
+El campo `dinosaurio` tiene que ser el nombre exacto. El número de `orden` es opcional
+pero ayuda a revisar.
 
-| slug | Signo | Elemento | Constelación |
-|---|---|---|---|
-| `01-tiranosaurio` | Tiranosaurio | Fuego | Aries |
-| `02-triceratops` | Triceratops | Tierra | Tauro |
-| `03-celofisis` | Celofisis | Aire | Géminis |
-| `04-maiasaura` | Maiasaura | Agua | Cáncer |
-| `05-braquiosaurio` | Braquiosaurio | Fuego | Leo |
-| `06-estegosaurio` | Estegosaurio | Tierra | Virgo |
-| `07-diplodoco` | Diplodoco | Aire | Libra |
-| `08-velociraptor` | Velociraptor | Agua | Escorpio |
-| `09-arqueopterix` | Arqueópterix | Fuego | Sagitario |
-| `10-anquilosaurio` | Anquilosaurio | Tierra | Capricornio |
-| `11-therizinosaurio` | Therizinosaurio | Aire | Acuario |
-| `12-espinosaurio` | Espinosaurio | Agua | Piscis |
-
-### Reglas del contenido
-
-| Campo | Regla |
+| Nombre | Fechas |
 |---|---|
-| `mes` | `"YYYY-MM"`. Ejemplo: `"2026-12"`. |
-| `edicion` | Número entero desde 1. La primera edición fue la 1. |
-| `titulo` | Una frase corta. Máximo 120 caracteres. |
-| `texto` | Entre 40 y 1200 caracteres. |
-| `tags` | De 0 a 3. Cortos. Máximo 60 caracteres cada uno. |
-| `<` y `>` | Prohibidos en cualquier texto. No uses HTML. |
+| Tiranosaurio | 21 de marzo al 19 de abril |
+| Triceratops | 20 de abril al 20 de mayo |
+| Celofisis | 21 de mayo al 20 de junio |
+| Maiasaura | 21 de junio al 22 de julio |
+| Braquiosaurio | 23 de julio al 22 de agosto |
+| Estegosaurio | 23 de agosto al 22 de septiembre |
+| Diplodoco | 23 de septiembre al 22 de octubre |
+| Velociraptor | 23 de octubre al 21 de noviembre |
+| Arqueoptérix | 22 de noviembre al 21 de diciembre |
+| Anquilosaurio | 22 de diciembre al 19 de enero |
+| Therizinosaurio | 20 de enero al 18 de febrero |
+| Espinosaurio | 19 de febrero al 20 de marzo |
+
+### Campos de cada signo
+
+| Campo | Qué es | Largo |
+|---|---|---|
+| `intro` | La entrada. Qué le pide el mes a ese signo. | 60–200 caracteres |
+| `tech` | Lo digital: apps, cuentas, proyectos, pantallas. | 60–200 |
+| `manada` | Vínculos: amistades, familia, pareja, equipo. | 60–200 |
+| `plata` | Dinero, gastos, suscripciones, decisiones de compra. | 60–200 |
+| `hobby` | Lo que hace por gusto. | 60–200 |
+| `tu_superpoder` | Frase corta. **La primera oración se usa como título del correo.** | 20–80 |
+| `tu_rabbit_hole` | Un dato real de paleontología, contado como curiosidad. | 40–200 |
+| `fosil_de_la_suerte` | Un fósil con una frase que lo conecte con la personalidad. | 20–120 |
+
+Los seis campos del medio (`tech`, `manada`, `plata`, `hobby`, `tu_rabbit_hole`,
+`fosil_de_la_suerte`) salen en el correo como **bloques con etiqueta**, uno debajo del
+otro. El `intro` sale como párrafo de entrada y `tu_superpoder` como título.
 
 ### Reglas de escritura
 
-- De 3 a 5 frases por predicción. Ni una más.
-- Un solo idée force por texto. No intentes decir todo.
-- Que termine en algo concreto que la persona pueda hacer, no en "el universo te habla".
-- No uses emojis. Los tags llevan los glifos (☄ ✦ ◐).
-- No uses markdown. Ni negritas, ni listas, ni `#`.
-- No menciones a terceros (marcas, personas, empresas).
+- Una sola idea por campo. No metas tres consejos donde cabe uno.
+- Que cada campo termine en algo concreto que la persona pueda hacer.
+- Nada de emojis. Nada de markdown. Nada de `<` ni `>`.
+- No menciones marcas, empresas ni personas reales que no sean paleontólogos.
 - No prometas salud, dinero, embarazos, empleo ni resultados legales.
-- Escribe "tú" con acento cuando es pronombre ("tú ruges"), y "tu" sin acento cuando es
+- "Tú" con acento cuando es pronombre ("tú ruges"); "tu" sin acento cuando es
   posesivo ("tu manada").
-- "Fósil" lleva tilde. "Hueso" y "terna" van sin tilde.
-- Nada de `<script>`, `<b>` ni nada parecido.
-
-### Cómo saber si está bien
-
-Antes de mandarlo, alguien lo pasa por un validador:
-
-```bash
-pnpm predicciones:validar 2026-12.json
-```
-
-Si sale `OK: la prediccion es valida.`, está listo. Si no, el validador te dice exactamente
-qué falla y en qué signo.
+- "Fósil" lleva tilde.
+- Los datos de `tu_rabbit_hole` deben ser reales y verificables.
+- Los 12 `intro` deben ser distintos entre sí.
 
 ---
 
-## 3. Formato alternativo: textos sueltos
+## 3. Cómo se procesa
 
-Si te da más batería mandar un JSON, mándame **13 archivos de texto plano**:
+Del JSON del generador sale el archivo que se sube. La conversión la hace un script:
 
-```
-general.txt
-01-tiranosaurio.txt
-02-triceratops.txt
-03-celofisis.txt
-04-maiasaura.txt
-05-braquiosaurio.txt
-06-estegosaurio.txt
-07-diplodoco.txt
-08-velociraptor.txt
-09-arqueopterix.txt
-10-anquilosaurio.txt
-11-therizinosaurio.txt
-12-espinosaurio.txt
+```bash
+pnpm predicciones:importar diciembre-2026.json --edicion 4
 ```
 
-También acepta el nombre del dinosaurio en vez del slug (`Tiranosaurio.txt`).
+Ese comando:
 
-Dentro de cada archivo:
+1. Lee `mes` + `anio` y arma `2026-12`.
+2. Empareja cada `dinosaurio` con su slug interno.
+3. Pone `intro` como texto y la primera oración de `tu_superpoder` como título.
+4. Convierte las seis secciones restantes en bloques etiquetados.
+5. Valida todo y escribe `prediccion-2026-12.json`.
 
+Después se sube:
+
+```bash
+pnpm predicciones:validar prediccion-2026-12.json
+pnpm predicciones:subir  prediccion-2026-12.json
 ```
-Título: El rugido tiene fecha
-Empiezas cosas que no terminas y luego te culpas de no tener tiempo. Este mes se acabó la excusa: arranca aunque sea feo, aunque sea a medias. La fila no espera.
-- Arranca ya
-- Cero filas
-```
-
-- La primera línea `Título: ...` (o `# ...`) es el título.
-- Las líneas que empiezan con `- ` son los tags (máximo 3).
-- Todo lo demás es el texto.
-
-Con eso yo lo convierto al JSON y lo subo.
 
 ---
 
@@ -157,9 +128,6 @@ limpio el día 1.
 
 Ejemplo: la predicción de diciembre se entrega el 25 de noviembre o antes.
 
-Si necesitas tiempo extra, avisa. Se puede enviar a mano el día 1 con el link
-`workflow_dispatch` de GitHub Actions.
-
 ---
 
 ## 5. Ejemplos
@@ -167,22 +135,21 @@ Si necesitas tiempo extra, avisa. Se puede enviar a mano el día 1 con el link
 ### Mal
 
 ```
-"texto": "Hoy el universo te habla. <b>Tus hermanos</b> te traicionarán pronto 💀 y perderás dinero. Compra bitcoin YA."
+"tech": "El universo conspira a tu favor 💀 y tus hermanos te van a traicionar. <b>Compra bitcoin YA</b>."
 ```
 
-Problems: HTML (`<b>`), emoji, menciona terceros (hermanos, bitcoin), promesa de dinero,
-sin idea force concreta, y no dice qué hacer.
+Problemas: emoji, HTML, menciona terceros, promete dinero y no tiene idea fuerza.
 
 ### Bien
 
 ```
-"texto": "Hoy el universo te habla poco y tus hermanos te escuchan mucho. Este mes el problema no es que no tengas razón: es que la dices tarde. Manda ese mensaje que llevas tres semanas escribiendo, aunque te tiemble el dedo.",
+"tech": "Ese proyecto zombie que ocupa espacio en tu disco y en tu cabeza por fin se va. Con el terreno limpio, lo nuevo arranca a la primera."
 ```
 
-Problema: le atinas a tu culpa sin mandarte a comprar nada, y termina con algo concreto.
+Le atina a algo concreto, sin mandarte a comprar nada, y cierra con una imagen clara.
 
 ---
 
 ## 6. Dudas
 
-Escríbele al que te pasó esto. Si algo del formato no queda claro, se ajusta.
+Escríbele a quien te pasó esto. Si algo del formato no queda claro, se ajusta.

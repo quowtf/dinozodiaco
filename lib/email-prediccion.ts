@@ -1,4 +1,4 @@
-import type { PrediccionBloque } from "@/lib/predicciones";
+import type { PrediccionBloque, PrediccionSeccion } from "@/lib/predicciones";
 
 /**
  * Constructor del correo mensual de predicciones.
@@ -26,7 +26,7 @@ export interface EmailInput {
   piedra: string;
   manada: string;
   bloque: PrediccionBloque; // titulo/texto/tags del mes para este signo
-  general: PrediccionBloque;
+  secciones: PrediccionSeccion[]; // tech, manada, plata, hobby...
   edicion: number;
   mes: string; // "2026-12"
   mesLabel: string; // "Diciembre"
@@ -78,6 +78,17 @@ function celdaDato(etiqueta: string, valor: string): string {
         </td>`;
 }
 
+/** Bloque con etiqueta (tech, manada, plata, hobby...). */
+function bloqueSeccion(etiqueta: string, texto: string): string {
+  return `
+          <tr>
+            <td style="padding:22px 32px 0 32px;">
+              <p style="margin:0 0 6px 0;font-family:${SANS};font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:${COLORES.gold};">${escapar(etiqueta)}</p>
+              <p style="margin:0;font-family:${SANS};font-size:15px;line-height:1.6;color:${COLORES.creamDim};">${escapar(texto)}</p>
+            </td>
+          </tr>`;
+}
+
 /** Chips de tags. */
 function filaTags(tags: string[]): string {
   if (tags.length === 0) return "";
@@ -110,7 +121,7 @@ export function emailHtml(input: EmailInput): string {
     piedra,
     manada,
     bloque,
-    general,
+    secciones,
     edicion,
     mesLabel,
     unsubscribeUrl,
@@ -160,20 +171,8 @@ export function emailHtml(input: EmailInput): string {
           </td>
         </tr>
 
-        <!-- Prediccion general -->
-        <tr>
-          <td style="padding:26px 32px 0 32px;">
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${COLORES.navyDeep};border-left:3px solid ${COLORES.gold};border-radius:8px;">
-              <tr>
-                <td style="padding:18px 20px;">
-                  <p style="margin:0 0 8px 0;font-family:${SANS};font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:${COLORES.gold};">Lo de este mes</p>
-                  <p style="margin:0 0 6px 0;font-family:${SERIF};font-size:17px;line-height:1.35;color:${COLORES.cream};">${escapar(general.titulo)}</p>
-                  <p style="margin:0;font-family:${SANS};font-size:15px;line-height:1.6;color:${COLORES.creamDim};">${escapar(general.texto)}</p>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
+        <!-- Secciones del signo (tech, manada, plata, hobby...) -->
+        ${secciones.map((s) => bloqueSeccion(s.etiqueta, s.texto)).join("")}
 
         <!-- Ficha del dinosaurio -->
         <tr>
@@ -264,7 +263,7 @@ export function emailTexto(input: EmailInput): string {
     piedra,
     manada,
     bloque,
-    general,
+    secciones,
     edicion,
     mesLabel,
     unsubscribeUrl,
@@ -290,13 +289,14 @@ export function emailTexto(input: EmailInput): string {
     lineas.push("");
   }
 
-  lineas.push("-".repeat(46));
-  lineas.push("LO DE ESTE MES");
-  lineas.push("");
-  lineas.push(general.titulo);
-  lineas.push("");
-  lineas.push(general.texto);
-  lineas.push("");
+  for (const seccion of secciones) {
+    lineas.push("-".repeat(46));
+    lineas.push(seccion.etiqueta.toUpperCase());
+    lineas.push("");
+    lineas.push(seccion.texto);
+    lineas.push("");
+  }
+
   lineas.push("-".repeat(46));
   lineas.push("TU DINOSAURIO");
   lineas.push("");

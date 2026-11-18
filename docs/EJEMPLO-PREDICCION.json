@@ -1,15 +1,6 @@
 {
   "mes": "2026-12",
-  "edicion": 3,
-  "general": {
-    "titulo": "Suelo libre para lo nuevo",
-    "texto": "El cielo trae ganas de empezar cosas y poca paciencia para lo que ya no sirve. Si algo se va a caer, que caiga este mes: después queda el terreno libre para lo nuevo. Los de tierra sostienen, los de fuego arrancan, los de aire proponen y los de agua sienten todo al doble. Revisa a las 6:06 de la tarde si ya cayó.",
-    "tags": [
-      "Energía de arranque",
-      "Mes para soltar",
-      "Revisa a las 6:06 pm"
-    ]
-  },
+  "edicion": 4,
   "signos": {
     "01-tiranosaurio": {
       "titulo": "El rugido tiene fecha",
@@ -17,6 +8,32 @@
       "tags": [
         "Arranca ya",
         "Cero filas"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 01-tiranosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 01-tiranosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 01-tiranosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 01-tiranosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 01-tiranosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 01-tiranosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "02-triceratops": {
@@ -25,6 +42,32 @@
       "tags": [
         "Paciencia",
         "Cabezazo"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 02-triceratops. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 02-triceratops. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 02-triceratops. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 02-triceratops. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 02-triceratops. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 02-triceratops. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "03-celofisis": {
@@ -33,6 +76,32 @@
       "tags": [
         "Filtra el ruido",
         "Camina sin teléfono"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 03-celofisis. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 03-celofisis. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 03-celofisis. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 03-celofisis. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 03-celofisis. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 03-celofisis. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "04-maiasaura": {
@@ -41,6 +110,32 @@
       "tags": [
         "Alguien te necesita",
         "Distingue amor de culpa"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 04-maiasaura. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 04-maiasaura. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 04-maiasaura. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 04-maiasaura. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 04-maiasaura. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 04-maiasaura. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "05-braquiosaurio": {
@@ -49,6 +144,32 @@
       "tags": [
         "Mira más alto",
         "Comparte lo que sabes"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 05-braquiosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 05-braquiosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 05-braquiosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 05-braquiosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 05-braquiosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 05-braquiosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "06-estegosaurio": {
@@ -57,6 +178,32 @@
       "tags": [
         "Una cosa bien hecha",
         "Tu método gana"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 06-estegosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 06-estegosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 06-estegosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 06-estegosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 06-estegosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 06-estegosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "07-diplodoco": {
@@ -65,6 +212,32 @@
       "tags": [
         "Decide y cierra",
         "Tu paz primero"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 07-diplodoco. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 07-diplodoco. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 07-diplodoco. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 07-diplodoco. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 07-diplodoco. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 07-diplodoco. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "08-velociraptor": {
@@ -73,6 +246,32 @@
       "tags": [
         "Espera dos días",
         "Tu garra acierta"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 08-velociraptor. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 08-velociraptor. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 08-velociraptor. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 08-velociraptor. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 08-velociraptor. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 08-velociraptor. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "09-arqueopterix": {
@@ -81,6 +280,32 @@
       "tags": [
         "Elige un ramo",
         "El cielo no se acaba"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 09-arqueopterix. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 09-arqueopterix. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 09-arqueopterix. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 09-arqueopterix. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 09-arqueopterix. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 09-arqueopterix. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "10-anquilosaurio": {
@@ -89,6 +314,32 @@
       "tags": [
         "Enterate a tiempo",
         "Blindado por fuera"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 10-anquilosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 10-anquilosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 10-anquilosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 10-anquilosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 10-anquilosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 10-anquilosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "11-therizinosaurio": {
@@ -97,6 +348,32 @@
       "tags": [
         "Acepta lo raro",
         "Encajas en algo más grande"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 11-therizinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 11-therizinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 11-therizinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 11-therizinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 11-therizinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 11-therizinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     },
     "12-espinosaurio": {
@@ -105,6 +382,32 @@
       "tags": [
         "Dos mundos, un día",
         "Lo que sientes es real"
+      ],
+      "secciones": [
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 1 para 12-espinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 2 para 12-espinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu plata",
+          "texto": "Texto de ejemplo de la seccion 3 para 12-espinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu hobby",
+          "texto": "Texto de ejemplo de la seccion 4 para 12-espinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu tech",
+          "texto": "Texto de ejemplo de la seccion 5 para 12-espinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        },
+        {
+          "etiqueta": "Tu manada",
+          "texto": "Texto de ejemplo de la seccion 6 para 12-espinosaurio. Aqui va el contenido real del mes; esto es solo la forma."
+        }
       ]
     }
   }

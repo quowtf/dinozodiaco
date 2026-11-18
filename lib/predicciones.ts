@@ -1,16 +1,27 @@
 import { SIGNOS } from "@/data/signos";
 import { upstashGet } from "@/lib/upstash";
 
+export interface PrediccionSeccion {
+  etiqueta: string;
+  texto: string;
+}
+
 export interface PrediccionBloque {
   titulo: string;
   texto: string;
   tags: string[];
+  /** Bloques extra con etiqueta (tech, manada, plata, hobby...). */
+  secciones?: PrediccionSeccion[];
 }
 
 export interface PrediccionMes {
   mes: string; // "2026-12"
   edicion: number; // 3
-  general: PrediccionBloque;
+  /**
+   * Prediccion general del mes. Opcional: es contenido del sitio,
+   * no del correo. Si falta, la home usa su texto de respaldo.
+   */
+  general?: PrediccionBloque;
   signos: Record<string, PrediccionBloque>; // clave = slug de data/signos.ts
 }
 
@@ -26,6 +37,10 @@ const TEXTO_MIN = 40;
 const TEXTO_MAX = 1200;
 const MAX_TAGS = 3;
 const MAX_TAG = 60;
+const MAX_SECCIONES = 10;
+const MAX_ETIQUETA = 40;
+const SECCION_TEXTO_MIN = 10;
+const SECCION_TEXTO_MAX = 600;
 
 const MESES_ES = [
   "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -134,6 +149,58 @@ function validarBloque(
       }
     });
   }
+
+  // Secciones opcionales (tech, manada, plata, hobby...).
+  if (b.secciones !== undefined) {
+    if (!Array.isArray(b.secciones)) {
+      errores.push(`${ruta}.secciones: se esperaba un array`);
+    } else if (b.secciones.length > MAX_SECCIONES) {
+      errores.push(
+        `${ruta}.secciones: maximo ${MAX_SECCIONES} secciones (tiene ${b.secciones.length})`,
+      );
+    } else {
+      b.secciones.forEach((seccion, i) => {
+        const r = `${ruta}.secciones[${i}]`;
+
+        if (
+          typeof seccion !== "object" ||
+          seccion === null ||
+          Array.isArray(seccion)
+        ) {
+          errores.push(`${r}: se esperaba un objeto con etiqueta y texto`);
+          return;
+        }
+
+        const s = seccion as Record<string, unknown>;
+
+        if (!esTexto(s.etiqueta) || s.etiqueta.trim() === "") {
+          errores.push(`${r}.etiqueta: etiqueta vacia`);
+        } else if (s.etiqueta.length > MAX_ETIQUETA) {
+          errores.push(
+            `${r}.etiqueta: maximo ${MAX_ETIQUETA} caracteres (tiene ${s.etiqueta.length})`,
+          );
+        }
+
+        if (!esTexto(s.texto) || s.texto.trim() === "") {
+          errores.push(`${r}.texto: texto vacio`);
+        } else {
+          if (s.texto.length < SECCION_TEXTO_MIN) {
+            errores.push(
+              `${r}.texto: minimo ${SECCION_TEXTO_MIN} caracteres (tiene ${s.texto.length})`,
+            );
+          }
+          if (s.texto.length > SECCION_TEXTO_MAX) {
+            errores.push(
+              `${r}.texto: maximo ${SECCION_TEXTO_MAX} caracteres (tiene ${s.texto.length})`,
+            );
+          }
+          if (s.texto.includes("<") || s.texto.includes(">")) {
+            errores.push(`${r}.texto: no puede contener < ni >`);
+          }
+        }
+      });
+    }
+  }
 }
 
 /**
@@ -157,7 +224,10 @@ export function validarPrediccion(datos: unknown): ResultadoValidacion {
     errores.push(`edicion: se esperaba un entero >= 1 (tiene ${JSON.stringify(d.edicion)})`);
   }
 
-  validarBloque(d.general, "general", errores);
+  // La general es contenido del sitio: opcional en el correo.
+  if (d.general !== undefined) {
+    validarBloque(d.general, "general", errores);
+  }
 
   const esperadas = clavesSignosEsperadas();
 

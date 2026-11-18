@@ -174,7 +174,7 @@ export function construirEmailInput(
     piedra: signo.piedra,
     manada: signo.manada,
     bloque,
-    general: prediccion.general,
+    secciones: bloque.secciones ?? [],
     edicion: prediccion.edicion,
     mes: prediccion.mes,
     mesLabel: etiquetaMes(prediccion.mes),

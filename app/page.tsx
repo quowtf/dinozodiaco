@@ -16,6 +16,10 @@ async function prediccionGeneral() {
 
   try {
     const datos = await prediccionDelMes(slugSignoActual());
+
+    // La general del mes es opcional: si no viene, la home usa el respaldo.
+    if (!datos.general) return null;
+
     return {
       titulo: datos.general.titulo,
       texto: datos.general.texto,

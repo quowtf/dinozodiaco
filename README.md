@@ -81,20 +81,29 @@ pnpm predicciones:setup
    formato está en [`docs/PREDICCIONES.md`](docs/PREDICCIONES.md), y hay un
    ejemplo completo y válido en
    [`docs/EJEMPLO-PREDICCION.json`](docs/EJEMPLO-PREDICCION.json).
-2. Si te lo mandan como JSON:
+2. Convierte el JSON del generador al formato que sube la app:
 
    ```bash
-   pnpm predicciones:validar 2026-12.json    # revisa el formato
-   pnpm predicciones:subir 2026-12.json      # lo sube a Upstash
+   pnpm predicciones:importar diciembre-2026.json --edicion 4
    ```
 
-   Si te lo mandan como 13 archivos de texto:
+   Luego valida y sube:
 
    ```bash
-   pnpm predicciones:ensamblar --dir ~/textos-2026-12 --mes 2026-12 --edicion 3 --out 2026-12.json
+   pnpm predicciones:validar prediccion-2026-12.json
+   pnpm predicciones:subir  prediccion-2026-12.json
+   ```
+
+   Si te mandan 13 archivos de texto en vez de un JSON:
+
+   ```bash
+   pnpm predicciones:ensamblar --dir ~/textos-2026-12 --mes 2026-12 --edicion 4 --out 2026-12.json
    pnpm predicciones:validar 2026-12.json
    pnpm predicciones:subir 2026-12.json
    ```
+
+   La predicción **general** del mes es opcional y va solo en el sitio web, nunca en
+   el correo. Si el JSON no la trae, la home usa su texto de respaldo.
 
 3. La home muestra la predicción general en menos de 5 minutos (revalidación automática).
 4. El día 1 a las 18:06 salen los 12 correos solos.
@@ -158,6 +167,7 @@ lib/envio.ts                           ventana horaria y armado del correo
 lib/email-prediccion.ts                HTML y texto plano del correo (sin imagenes)
 scripts/setup-resend.ts                setup idempotente de Resend
 scripts/predicciones.ts                CLI: validar / subir / ver
+scripts/importar-prediccion.ts         convierte el JSON del generador al de la app
 scripts/ensamblar-predicciones.ts      convierte textos sueltos en JSON
 scripts/rotar-cron-secret.ts            genera un CRON_SECRET nuevo
 scripts/verificar-cron.ts               comprueba que Vercel y GitHub coinciden

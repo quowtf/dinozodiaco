@@ -24,6 +24,10 @@ on:
         required: false
         default: "false"
         type: string
+      destino:
+        description: "Manda UN correo de prueba a esta dirección (no envía a los suscritos)"
+        required: false
+        type: string
 
 # Dos corridas no se pisan: si GitHub retrasa y solapa, la segunda espera.
 concurrency:
@@ -40,18 +44,22 @@ jobs:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
           MES: ${{ inputs.mes }}
           FORCE: ${{ inputs.force }}
+          DESTINO: ${{ inputs.destino }}
         run: |
           set -euo pipefail
 
-          # Un solo body JSON. Dos -d en curl se concatenan con "&" y
+          # Un solo body JSON: dos -d en curl se concatenan con "&" y
           # producen un JSON invalido.
-          body='{}'
-          if [ -n "${MES:-}" ] && [ "${FORCE:-false}" = "true" ]; then
-            body="{\"mes\":\"${MES}\",\"force\":true}"
-          elif [ -n "${MES:-}" ]; then
-            body="{\"mes\":\"${MES}\"}"
-          elif [ "${FORCE:-false}" = "true" ]; then
-            body='{"force":true}'
+          partes=()
+          [ -n "${MES:-}" ] && partes+=("\"mes\":\"${MES}\"")
+          [ "${FORCE:-false}" = "true" ] && partes+=('"force":true')
+          # destino = un solo correo de prueba, no toca a los suscritos.
+          [ -n "${DESTINO:-}" ] && partes+=("\"destino\":\"${DESTINO}\"")
+
+          if [ ${#partes[@]} -eq 0 ]; then
+            body='{}'
+          else
+            body="{$(IFS=,; echo "${partes[*]}")}"
           fi
 
           echo "POST $SITE_URL/api/cron/predicciones"

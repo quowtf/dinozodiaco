@@ -45,8 +45,12 @@ crear key `prediccion:2026-11` → pegar el contenido del JSON.
 contacto → añadir al segment `dinozodiaco:<signo>`. (Solo los contactos que ya
 existían; los nuevos ya entran solos al suscribirse.)
 
-**3. Disparar el envío** — GitHub → Actions → *Envío mensual de predicciones* →
-*Run workflow* → `mes` = `2026-11`, `force` = `true`.
+**3. Probar** — GitHub → Actions → *Envío mensual de predicciones* → *Run
+workflow* → `mes` = `2026-11`, `force` = `true`, `destino` = tu correo. Llega **un**
+correo de prueba; los suscritos no reciben nada.
+
+**4. Enviar a todos** — mismo botón, `mes` = `2026-11`, `force` = `true`, sin
+`destino`.
 
 Los segments, topics y contact properties se crean solos la primera vez que corre
 el envío: el endpoint los asegura antes de mandar. No hace falta correr `setup`.

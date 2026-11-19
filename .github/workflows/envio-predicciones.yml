@@ -42,9 +42,24 @@ jobs:
           FORCE: ${{ inputs.force }}
         run: |
           set -euo pipefail
-          args=(-sS -X POST "$SITE_URL/api/cron/predicciones" \
-                -H "Authorization: Bearer $CRON_SECRET" \
-                -H "Content-Type: application/json")
-          if [ -n "${MES:-}" ]; then args+=(-d "{\"mes\":\"$MES\"}"); fi
-          if [ "${FORCE:-false}" = "true" ]; then args+=(-d '{"force":true}'); fi
-          curl "${args[@]}"
+
+          # Un solo body JSON. Dos -d en curl se concatenan con "&" y
+          # producen un JSON invalido.
+          body='{}'
+          if [ -n "${MES:-}" ] && [ "${FORCE:-false}" = "true" ]; then
+            body="{\"mes\":\"${MES}\",\"force\":true}"
+          elif [ -n "${MES:-}" ]; then
+            body="{\"mes\":\"${MES}\"}"
+          elif [ "${FORCE:-false}" = "true" ]; then
+            body='{"force":true}'
+          fi
+
+          echo "POST $SITE_URL/api/cron/predicciones"
+          echo "body: $body"
+
+          # --fail-with-body: un 4xx/5xx rompe el step (si no, un 401
+          # pasa como exito y el fallo queda invisible).
+          curl -sS --fail-with-body -X POST "$SITE_URL/api/cron/predicciones" \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            -H "Content-Type: application/json" \
+            -d "$body"

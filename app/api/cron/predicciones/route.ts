@@ -8,7 +8,12 @@ import {
   sitioUrl,
 } from "@/lib/envio";
 import { prediccionDelMes, slugSignoActual } from "@/lib/predicciones";
-import { conLimite, resendClient, segmentPorNombre, topicPorNombre } from "@/lib/resend";
+import {
+  asegurarSegments,
+  asegurarTopics,
+  conLimite,
+  resendClient,
+} from "@/lib/resend";
 import { upstashGet, upstashSet } from "@/lib/upstash";
 
 const MES_RE = /^\d{4}-\d{2}$/;
@@ -172,22 +177,38 @@ export async function POST(request: Request) {
     }
 
     // --- Ids de Resend ----------------------------------------------------
-    const topicId = await topicPorNombre("predicciones");
+    // Auto-reparable: si falta el topic o algun segment, se crean aqui.
+    // Asi no hace falta correr un setup con credenciales en local.
+    const topics = await asegurarTopics([
+      {
+        nombre: "predicciones",
+        descripcion: "Predicciones mensuales de Dinozodiaco",
+      },
+      {
+        nombre: "merch",
+        descripcion: "Avisos de la tienda de Dinozodiaco",
+      },
+    ]);
+
+    const topicId = topics.predicciones;
     if (!topicId) {
       return Response.json(
-        { ok: false, error: 'no existe el topic "predicciones"' },
+        { ok: false, error: 'no se pudo obtener el topic "predicciones"' },
         { status: 500 },
       );
     }
 
+    const nombresSegments = SIGNOS.map((s) => nombreSegmento(s.slug));
+    const idsSegments = await asegurarSegments(nombresSegments);
+
     const segmentos = new Map<string, string>();
     for (const signo of SIGNOS) {
-      const id = await segmentPorNombre(nombreSegmento(signo.slug));
+      const id = idsSegments[nombreSegmento(signo.slug)];
       if (!id) {
         return Response.json(
           {
             ok: false,
-            error: `no existe el segment ${nombreSegmento(signo.slug)} (corre el setup de Resend)`,
+            error: `no se pudo obtener el segment ${nombreSegmento(signo.slug)}`,
           },
           { status: 500 },
         );

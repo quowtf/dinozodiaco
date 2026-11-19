@@ -33,6 +33,26 @@ textos del mes  →   pnpm predicciones:subir  →  Upstash (prediccion:YYYY-MM)
 La app decide si está en la ventana de envío y deduplica con la key `enviado:{mes}` de
 Upstash. Por eso el cron puede dispararse cada 15 minutos sin miedo a duplicados.
 
+### Camino sin secretos en tu máquina
+
+Si no tienes (o no quieres tener) las llaves en local, todo se puede hacer desde
+las interfaces web. No hay que rotar nada y no se guarda ningún secreto en tu equipo.
+
+**1. Subir la predicción del mes** — Upstash Console → tu base → *Data Browser* →
+crear key `prediccion:2026-11` → pegar el contenido del JSON.
+
+**2. Meter a los suscritos en su segment** — Resend Dashboard → Contacts → cada
+contacto → añadir al segment `dinozodiaco:<signo>`. (Solo los contactos que ya
+existían; los nuevos ya entran solos al suscribirse.)
+
+**3. Disparar el envío** — GitHub → Actions → *Envío mensual de predicciones* →
+*Run workflow* → `mes` = `2026-11`, `force` = `true`.
+
+Los segments, topics y contact properties se crean solos la primera vez que corre
+el envío: el endpoint los asegura antes de mandar. No hace falta correr `setup`.
+
+El secreto vive solo en Vercel y en GitHub; nunca pasa por tu máquina.
+
 ### Configuración (una vez)
 
 **1. Resend.** Verificar el dominio `dinozodiaco.com` (SPF + DKIM) y crear una API key
@@ -58,8 +78,9 @@ Copia [`.env.example`](.env.example) y llénalo. Lo que falta configurar:
 | `PREDICCIONES_DIA` | `1` |
 | `PREDICCIONES_SEGMENT_PREFIX` | `dinozodiaco` |
 
-**4. Setup de Resend.** Crea contact properties, topics, los 12 segments (uno por signo)
-y mete a los contactos existentes en el segment de su dinosaurio. Es idempotente:
+**4. Setup de Resend (opcional).** Ya no hace falta para enviar: el endpoint crea
+topics y segments solo. El script sigue existiendo para el backfill de contactos
+viejos, y es idempotente:
 
 ```bash
 pnpm predicciones:setup

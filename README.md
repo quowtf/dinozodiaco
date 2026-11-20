@@ -27,7 +27,7 @@ textos del mes  →   pnpm predicciones:subir  →  Upstash (prediccion:YYYY-MM)
                           ↓                       │
                     POST /api/cron/predicciones ──┘
                           ↓
-                    12 Broadcasts (uno por signo)  →  correos
+              un correo por contacto (batch)     →  correos
 ```
 
 La app decide si está en la ventana de envío y deduplica con la key `enviado:{mes}` de
@@ -41,9 +41,8 @@ las interfaces web. No hay que rotar nada y no se guarda ningún secreto en tu e
 **1. Subir la predicción del mes** — Upstash Console → tu base → *Data Browser* →
 crear key `prediccion:2026-11` → pegar el contenido del JSON.
 
-**2. Meter a los suscritos en su segment** — Resend Dashboard → Contacts → cada
-contacto → añadir al segment `dinozodiaco:<signo>`. (Solo los contactos que ya
-existían; los nuevos ya entran solos al suscribirse.)
+**2. Nada más** — el signo de cada persona ya está en su contact property
+`signo`, que se llena al suscribirse. No hay segments que mantener.
 
 **3. Probar** — GitHub → Actions → *Envío mensual de predicciones* → *Run
 workflow* → `mes` = `2026-11`, `force` = `true`, `destino` = tu correo. Llega **un**
@@ -52,8 +51,10 @@ correo de prueba; los suscritos no reciben nada.
 **4. Enviar a todos** — mismo botón, `mes` = `2026-11`, `force` = `true`, sin
 `destino`.
 
-Los segments, topics y contact properties se crean solos la primera vez que corre
-el envío: el endpoint los asegura antes de mandar. No hace falta correr `setup`.
+El envío es **por contacto**, no por segment: se lee la lista de contactos, se
+agrupa por su property `signo` y se manda un correo personalizado a cada quien.
+Así cada persona solo ve su predicción y no hace falta crear 12 segments (el plan
+free de Resend solo permite 3).
 
 El secreto vive solo en Vercel y en GitHub; nunca pasa por tu máquina.
 
@@ -82,9 +83,9 @@ Copia [`.env.example`](.env.example) y llénalo. Lo que falta configurar:
 | `PREDICCIONES_DIA` | `1` |
 | `PREDICCIONES_SEGMENT_PREFIX` | `dinozodiaco` |
 
-**4. Setup de Resend (opcional).** Ya no hace falta para enviar: el endpoint crea
-topics y segments solo. El script sigue existiendo para el backfill de contactos
-viejos, y es idempotente:
+**4. Setup de Resend (opcional).** Solo asegura que existan las contact properties
+`signo` y `privacidad_aceptada`; no crea segments ni topics. Si las suscripciones
+ya funcionan en producción, no hace falta correrlo:
 
 ```bash
 pnpm predicciones:setup
@@ -173,10 +174,28 @@ responde `500`: nunca deja pasar a un desconocido.
 Si se te pasó la fecha, lánzalo a mano desde **GitHub → Actions → Envío mensual de
 predicciones → Run workflow**, con `mes` = `2026-12` y `force` = `true`.
 
+### Bajas
+
+Cada correo lleva un link propio (`/api/baja?e=...&t=...`) firmado con HMAC, más
+las cabeceras `List-Unsubscribe` y `List-Unsubscribe-Post` para que Gmail y
+Outlook muestren el botón de cancelar suscripción. El POST de un solo clic marca
+al contacto como `unsubscribed` en Resend y responde 200. Un token no sirve para
+dar de baja a otra persona.
+
+La clave del HMAC se genera sola la primera vez y vive en Upstash, así que no hay
+una env var nueva y los links sobreviven a la rotación de `CRON_SECRET`.
+
+### Límite del plan free
+
+El envío es transaccional (`emails.batch`), no broadcast. El plan free de Resend
+permite **100 correos por día y 3.000 al mes**. Con más de ~90 suscritos, un envío
+mensual se corta y hay que repartirlo en dos días o subir de plan. Los broadcasts
+(marketing) no tienen ese tope diario, pero exigen segments y el free solo da 3.
+
 ### Dónde revisar qué pasó
 
 - **Resend → Broadcasts**: los 12 envíos del mes, con entregas, aperturas y clics.
-- **Resend → Contacts**: los segmentos y quién está en cada uno.
+- **Resend → Contacts**: quién está suscrito, dado de baja y qué signo tiene.
 - **Upstash**: la key `prediccion:YYYY-MM` (contenido) y `enviado:YYYY-MM` (marca de que
   ya se envió). `pnpm predicciones:ver` imprime el contenido desde la terminal.
 - **GitHub → Actions**: el log de cada corrida.
@@ -187,7 +206,8 @@ predicciones → Run workflow**, con `mes` = `2026-12` y `force` = `true`.
 app/api/cron/predicciones/route.ts   endpoint que envia (POST, protegido con CRON_SECRET)
 lib/predicciones.ts                    tipos + validacion del contenido del mes
 lib/upstash.ts                         cliente Upstash por REST (sin SDK)
-lib/resend.ts                          helpers de Resend (segments, topics, properties)
+lib/resend.ts                          cliente de Resend y contact properties
+lib/baja.ts                            tokens HMAC de baja (sin tablas nuevas)
 lib/envio.ts                           ventana horaria y armado del correo
 lib/email-prediccion.ts                HTML y texto plano del correo (sin imagenes)
 scripts/setup-resend.ts                setup idempotente de Resend

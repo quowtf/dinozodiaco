@@ -1,12 +1,7 @@
 "use server";
 
 import { SIGNOS } from "@/data/signos";
-import { nombreSegmento, prefijoSegmento } from "@/lib/envio";
-import {
-  resendClient,
-  segmentPorNombre,
-  topicPorNombre,
-} from "@/lib/resend";
+import { resendClient } from "@/lib/resend";
 
 export type SubscribeState = {
   ok: boolean;
@@ -26,6 +21,13 @@ function esDuplicado(mensaje: string, statusCode?: number): boolean {
   return /already|exists|duplicate|taken/i.test(mensaje);
 }
 
+/**
+ * Alta en la lista.
+ *
+ * No se usan segments ni topics: el plan free de Resend solo permite 3
+ * segments y el envio mensual es por contacto. El signo vive en la
+ * contact property `signo`, y la baja en el flag `unsubscribed`.
+ */
 export async function subscribe(
   _prev: SubscribeState,
   formData: FormData,
@@ -46,38 +48,15 @@ export async function subscribe(
 
   const resend = resendClient();
 
-  // Los ids se resuelven por nombre: no hay ids hardcodeados.
-  // Si el setup de Resend todavia no se ha corrido, la suscripcion
-  // sigue funcionando (solo sin segment ni topics).
-  const [segmentId, topicPredicciones, topicMerch] = await Promise.all([
-    segmentPorNombre(nombreSegmento(signo)).catch(() => null),
-    topicPorNombre("predicciones").catch(() => null),
-    topicPorNombre("merch").catch(() => null),
-  ]);
-
   const properties = {
     signo,
     privacidad_aceptada: new Date().toISOString(),
   };
 
-  const segments = segmentId ? [{ id: segmentId }] : undefined;
-  const topics = topicPredicciones
-    ? [
-        { id: topicPredicciones, subscription: "opt_in" as const },
-        // merch en opt_out: el consentimiento explicito del form es para
-        // predicciones. Quien quiera la tienda la activa en la pagina de baja.
-        ...(topicMerch
-          ? [{ id: topicMerch, subscription: "opt_out" as const }]
-          : []),
-      ]
-    : undefined;
-
   const { error } = await resend.contacts.create({
     email,
     unsubscribed: false,
     properties,
-    segments,
-    topics,
   });
 
   if (!error) {
@@ -106,53 +85,8 @@ export async function subscribe(
       };
     }
 
-    // Sincroniza segment y topics: si cambio de dinosaurio, sale del
-    // segment viejo para no recibir dos predicciones al mes.
-    if (segmentId) {
-      const { error: errorSegment } = await resend.contacts.segments.add({
-        email,
-        segmentId,
-      });
-      if (errorSegment) {
-        console.warn("[subscribe] no se pudo agregar al segment:", errorSegment.message);
-      }
-
-      // Quita el contact de los segments de dinosaurio que ya no le
-      // corresponden (solo si el properties.signo cambio).
-      const { data: segmentosActuales } = await resend.contacts.segments.list({
-        email,
-        limit: 100,
-      });
-      const segmentosDino = (segmentosActuales?.data ?? []).filter(
-        (s) =>
-          s.name.startsWith(`${prefijoSegmento()}:`) &&
-          s.name !== nombreSegmento(signo),
-      );
-
-      for (const viejo of segmentosDino) {
-        const { error: errorRemove } = await resend.contacts.segments.remove({
-          email,
-          segmentId: viejo.id,
-        });
-        if (errorRemove) {
-          console.warn(
-            "[subscribe] no se pudo quitar del segment anterior:",
-            errorRemove.message,
-          );
-        }
-      }
-    }
-
-    if (topics) {
-      const { error: errorTopic } = await resend.contacts.topics.update({
-        email,
-        topics,
-      });
-      if (errorTopic) {
-        console.warn("[subscribe] no se pudieron actualizar los topics:", errorTopic.message);
-      }
-    }
-
+    // Vuelve a la lista: si estaba dado de baja, se reactiva (arriba).
+    // El signo se actualiza con el update de properties.
     return { ok: true, message: "¡Listo! Te avisamos de lo que sigue en Dinozodiaco." };
   }
 

@@ -1,29 +1,95 @@
 import { SIGNOS } from "@/data/signos";
+import { urlBaja } from "@/lib/baja";
 import { emailHtml, emailTexto } from "@/lib/email-prediccion";
 import {
   construirEmailInput,
   dentroDeVentana,
-  nombreSegmento,
   remitente,
   sitioUrl,
 } from "@/lib/envio";
 import { prediccionDelMes, slugSignoActual } from "@/lib/predicciones";
-import {
-  asegurarSegments,
-  asegurarTopics,
-  conLimite,
-  resendClient,
-} from "@/lib/resend";
+import { conLimite, resendClient } from "@/lib/resend";
 import { upstashGet, upstashSet } from "@/lib/upstash";
 
 const MES_RE = /^\d{4}-\d{2}$/;
-const UNSUBSCRIBE_PLACEHOLDER = "{{{RESEND_UNSUBSCRIBE_URL}}}";
+const LOTE = 100; // maximo de emails por llamada en resend.batch.send
 
 interface Body {
   mes?: string;
   dry?: boolean;
   force?: boolean;
   destino?: string;
+}
+
+interface Destinatario {
+  email: string;
+  signo: string;
+}
+
+/**
+ * Lista a quien hay que mandarle que, leyendo los contactos de Resend.
+ *
+ * `contacts.list()` no devuelve properties, asi que hay un `get` por
+ * contacto. Con listas grandes esto es el cuello de botella: a 1.000
+ * contactos son 1.000 llamadas (10 req/s = 100 s). Si la lista crece,
+ * conviene cachear el signo en Upstash al suscribirse.
+ */
+async function destinatarios(): Promise<{
+  validos: Destinatario[];
+  sinSigno: string[];
+}> {
+  const resend = resendClient();
+
+  const emails: string[] = [];
+  let cursor: string | undefined;
+
+  for (let pagina = 0; pagina < 20; pagina++) {
+    const { data, error } = await resend.contacts.list({
+      limit: 100,
+      ...(cursor ? { after: cursor } : {}),
+    });
+
+    if (error) throw new Error(`contacts.list -> ${error.message}`);
+
+    for (const contacto of data.data) {
+      if (!contacto.unsubscribed) emails.push(contacto.email);
+    }
+
+    if (!data.has_more || data.data.length === 0) break;
+    cursor = data.data[data.data.length - 1].id;
+  }
+
+  const slugs = new Set(SIGNOS.map((s) => s.slug));
+  const validos: Destinatario[] = [];
+  const sinSigno: string[] = [];
+
+  const resultados = await conLimite(
+    emails.map((email) => async () => {
+      const { data, error } = await resend.contacts.get({ email });
+      if (error) return { email, signo: null };
+
+      const properties = data.properties as
+        | Record<string, { value: unknown }>
+        | undefined;
+      const signo = properties?.signo?.value;
+
+      if (typeof signo !== "string" || !slugs.has(signo)) {
+        return { email, signo: null };
+      }
+      return { email, signo };
+    }),
+  );
+
+  for (const [i, r] of resultados.entries()) {
+    if (r instanceof Error) {
+      sinSigno.push(emails[i]);
+      continue;
+    }
+    if (r.signo) validos.push({ email: r.email, signo: r.signo });
+    else sinSigno.push(r.email);
+  }
+
+  return { validos, sinSigno };
 }
 
 export async function POST(request: Request) {
@@ -66,7 +132,6 @@ export async function POST(request: Request) {
     }
 
     // --- Ventana horaria (salvo force y dry) ------------------------------
-    // `dry` no tiene efectos: se puede previsualizar cualquier dia.
     if (!forzar && !seco) {
       const ventana = dentroDeVentana();
       if (!ventana.dentro) {
@@ -94,56 +159,55 @@ export async function POST(request: Request) {
     }
 
     const sitio = sitioUrl();
+    const remitenteFinal = remitente();
 
-    // --- Armado de los 12 correos ----------------------------------------
-    const entradas = SIGNOS.map((signo) => {
+    const armar = (slug: string, unsubscribeUrl: string) => {
+      const signo = SIGNOS.find((s) => s.slug === slug);
+      if (!signo) throw new Error(`signo desconocido: ${slug}`);
+
       const input = construirEmailInput(signo, prediccion, {
-        unsubscribeUrl: UNSUBSCRIBE_PLACEHOLDER,
+        unsubscribeUrl,
         sitio,
       });
+
       return {
-        slug: signo.slug,
-        nombre: signo.nombre,
+        slug,
         subject: `Tu prediccion de ${input.mesLabel} · ${signo.nombre}`,
-        previewText: `${input.bloque.titulo} — ${signo.nombre}`,
         html: emailHtml(input),
         text: emailTexto(input),
       };
-    });
+    };
 
     // --- Modo dry: devuelve el HTML, no envia nada ------------------------
+    // Usa un link de baja de ejemplo: no hay destinatario real.
     if (seco) {
+      const ejemplo = `${sitio}/api/baja?e=ejemplo%40dinozodiaco.com&t=ejemplo`;
+      const generados = SIGNOS.map((s) => armar(s.slug, ejemplo));
+
       return Response.json({
         ok: true,
         dry: true,
         mes,
-        html: entradas.map((e) => e.html),
-        texto: entradas.map((e) => e.text),
+        html: generados.map((g) => g.html),
+        texto: generados.map((g) => g.text),
       });
     }
 
     // --- Envio de un solo correo de prueba --------------------------------
     if (body.destino) {
+      const slug = SIGNOS[0].slug;
+      const baja = await urlBaja(body.destino, sitio);
+      const generado = armar(slug, baja);
+
       const resend = resendClient();
-      const primera = entradas[0];
-
-      // Fuera de un broadcast, Resend no resuelve el placeholder de baja.
-      const html = primera.html.replaceAll(
-        UNSUBSCRIBE_PLACEHOLDER,
-        `${sitio}/aviso-de-privacidad`,
-      );
-      const text = primera.text.replaceAll(
-        UNSUBSCRIBE_PLACEHOLDER,
-        `${sitio}/aviso-de-privacidad`,
-      );
-
       const { data, error } = await resend.emails.send({
-        from: remitente(),
+        from: remitenteFinal,
         to: body.destino,
         replyTo: "hola@dinozodiaco.com",
-        subject: primera.subject,
-        html,
-        text,
+        subject: generado.subject,
+        html: generado.html,
+        text: generado.text,
+        headers: cabecerasBaja(baja),
       });
 
       if (error) {
@@ -171,99 +235,102 @@ export async function POST(request: Request) {
           enviado: false,
           motivo: "ya-enviado",
           mes,
-          omitidos: SIGNOS.map((s) => ({ slug: s.slug, motivo: "ya-enviado" })),
         });
       }
     }
 
-    // --- Ids de Resend ----------------------------------------------------
-    // Auto-reparable: si falta el topic o algun segment, se crean aqui.
-    // Asi no hace falta correr un setup con credenciales en local.
-    const topics = await asegurarTopics([
-      {
-        nombre: "predicciones",
-        descripcion: "Predicciones mensuales de Dinozodiaco",
-      },
-      {
-        nombre: "merch",
-        descripcion: "Avisos de la tienda de Dinozodiaco",
-      },
-    ]);
+    // --- Destinatarios ----------------------------------------------------
+    const { validos, sinSigno } = await destinatarios();
 
-    const topicId = topics.predicciones;
-    if (!topicId) {
+    if (validos.length === 0) {
+      return Response.json({
+        ok: true,
+        enviado: false,
+        motivo: "sin-destinatarios",
+        mes,
+        sinSigno,
+      });
+    }
+
+    // --- Armado por persona ----------------------------------------------
+    type Correo = {
+      from: string;
+      to: string;
+      replyTo: string;
+      subject: string;
+      html: string;
+      text: string;
+      headers: Record<string, string>;
+    };
+
+    const preparados = await conLimite<Correo>(
+      validos.map(({ email, signo }) => async () => {
+        const baja = await urlBaja(email, sitio);
+        const generado = armar(signo, baja);
+        return {
+          from: remitenteFinal,
+          to: email,
+          replyTo: "hola@dinozodiaco.com",
+          subject: generado.subject,
+          html: generado.html,
+          text: generado.text,
+          headers: cabecerasBaja(baja),
+        };
+      }),
+    );
+
+    const correos = preparados.filter((c): c is Correo => !(c instanceof Error));
+
+    if (correos.length !== validos.length) {
+      const fallidos = preparados.length - correos.length;
       return Response.json(
-        { ok: false, error: 'no se pudo obtener el topic "predicciones"' },
+        {
+          ok: false,
+          error: `no se pudieron armar ${fallidos} correo(s)`,
+        },
         { status: 500 },
       );
     }
 
-    const nombresSegments = SIGNOS.map((s) => nombreSegmento(s.slug));
-    const idsSegments = await asegurarSegments(nombresSegments);
-
-    const segmentos = new Map<string, string>();
-    for (const signo of SIGNOS) {
-      const id = idsSegments[nombreSegmento(signo.slug)];
-      if (!id) {
-        return Response.json(
-          {
-            ok: false,
-            error: `no se pudo obtener el segment ${nombreSegmento(signo.slug)}`,
-          },
-          { status: 500 },
-        );
-      }
-      segmentos.set(signo.slug, id);
-    }
-
-    // --- 12 broadcasts ----------------------------------------------------
+    // --- Envio en lotes de 100 -------------------------------------------
     const resend = resendClient();
+    let enviados = 0;
+    const errores: string[] = [];
 
-    const resultados = await conLimite(
-      entradas.map(
-        (entrada) => async () => {
-          const { data, error } = await resend.broadcasts.create({
-            segmentId: segmentos.get(entrada.slug)!,
-            topicId,
-            from: remitente(),
-            replyTo: "hola@dinozodiaco.com",
-            subject: entrada.subject,
-            previewText: entrada.previewText,
-            html: entrada.html,
-            text: entrada.text,
-            name: `pred-${mes}-${entrada.slug}`,
-            send: true,
-          });
+    for (let i = 0; i < correos.length; i += LOTE) {
+      const lote = correos.slice(i, i + LOTE);
 
-          if (error) {
-            throw new Error(`${entrada.slug} -> ${error.message}`);
-          }
-          return { slug: entrada.slug, broadcastId: data?.id ?? null };
-        },
-      ),
-    );
+      const { data, error } = await resend.batch.send(lote, {
+        batchValidation: "permissive",
+      });
 
-    const enviados: { slug: string; broadcastId: string | null }[] = [];
-    const omitidos: { slug: string; motivo: string }[] = [];
+      if (error) {
+        errores.push(error.message);
+        continue;
+      }
 
-    for (const [i, resultado] of resultados.entries()) {
-      const slug = entradas[i].slug;
-      if (resultado instanceof Error) {
-        omitidos.push({ slug, motivo: resultado.message });
-      } else {
-        enviados.push(resultado);
+      enviados += data.data.length;
+
+      for (const e of data.errors ?? []) {
+        errores.push(`indice ${i + e.index}: ${e.message}`);
       }
     }
 
-    // Marcador de idempotencia: solo si se mandaron los 12.
-    if (omitidos.length === 0) {
+    // Marcador de idempotencia: solo si no hubo errores.
+    if (errores.length === 0) {
       await upstashSet(
         `enviado:${mes}`,
-        JSON.stringify({ ts: new Date().toISOString(), signos: enviados.map((e) => e.slug) }),
+        JSON.stringify({ ts: new Date().toISOString(), enviados }),
       );
     }
 
-    return Response.json({ ok: omitidos.length === 0, mes, enviados, omitidos });
+    return Response.json({
+      ok: errores.length === 0,
+      mes,
+      enviados,
+      sinSigno,
+      errores,
+    });
   } catch (error) {
     console.error("[cron/predicciones]", error);
     return Response.json(
@@ -274,4 +341,15 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
+}
+
+/**
+ * Cabeceras para la baja de un solo clic (RFC 8058).
+ * Gmail y Yahoo las usan para mostrar el boton "Cancelar suscripcion".
+ */
+function cabecerasBaja(url: string): Record<string, string> {
+  return {
+    "List-Unsubscribe": `<${url}>`,
+    "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+  };
 }

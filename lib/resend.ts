@@ -3,12 +3,12 @@ import { Resend } from "resend";
 /**
  * Helpers sobre la API de Resend.
  *
- * Todos los ids (segments, topics, properties) se resuelven POR NOMBRE en
- * runtime: nunca se hardcodean. Asi el setup se puede re-ejecutar en otra
- * cuenta y el deploy no depende de ids externos.
+ * El envio mensual es por contacto (el plan free solo permite 3 segments),
+ * asi que aqui no hay nada de segments ni topics. El signo de cada persona
+ * vive en la contact property `signo`.
  *
- * El cliente se instancia dentro de cada funcion para que el build de Vercel
- * no dependa de RESEND_API_KEY.
+ * El cliente se instancia dentro de cada funcion para que el build de
+ * Vercel no dependa de RESEND_API_KEY.
  */
 
 export function resendClient(): Resend {
@@ -23,44 +23,6 @@ export function resendClient(): Resend {
 }
 
 const PREFIJO_LOG = "[resend]";
-
-/** Segment por nombre exacto. null si no existe. */
-export async function segmentPorNombre(nombre: string): Promise<string | null> {
-  const resend = resendClient();
-  let cursor: string | undefined;
-
-  for (let pagina = 0; pagina < 5; pagina++) {
-    const { data, error } = await resend.segments.list({
-      limit: 100,
-      ...(cursor ? { after: cursor } : {}),
-    });
-
-    if (error) {
-      throw new Error(`segments.list -> ${error.message}`);
-    }
-
-    const encontrado = data.data.find((s) => s.name === nombre);
-    if (encontrado) return encontrado.id;
-
-    if (!data.has_more || data.data.length === 0) break;
-    cursor = data.data[data.data.length - 1].id;
-  }
-
-  return null;
-}
-
-/** Topic por nombre exacto. null si no existe. */
-export async function topicPorNombre(nombre: string): Promise<string | null> {
-  const resend = resendClient();
-  const { data, error } = await resend.topics.list();
-
-  if (error) {
-    throw new Error(`topics.list -> ${error.message}`);
-  }
-
-  const encontrado = data.data.find((t) => t.name === nombre);
-  return encontrado ? encontrado.id : null;
-}
 
 /** Keys de las contact properties que ya existen en la cuenta. */
 export async function propertiesExistentes(): Promise<string[]> {
@@ -78,12 +40,13 @@ export async function propertiesExistentes(): Promise<string[]> {
  * Crea las contact properties que falten. Idempotente: si ya existen,
  * no las toca (Resend rechaza duplicados).
  */
-export async function asegurarProperties(overrides: string[]): Promise<string[]> {
+export async function asegurarProperties(
+  requeridas: string[],
+): Promise<string[]> {
   const resend = resendClient();
   const existentes = await propertiesExistentes();
-  const creadas: string[] = [];
 
-  for (const key of overrides) {
+  for (const key of requeridas) {
     if (existentes.includes(key)) continue;
 
     const { error } = await resend.contactProperties.create({
@@ -92,7 +55,7 @@ export async function asegurarProperties(overrides: string[]): Promise<string[]>
     });
 
     if (error) {
-      // Si otra corrida lo creo entremedio, se ignora.
+      // Si otra corrida la creo entremedio, se ignora.
       if (!/exist|already/i.test(error.message)) {
         throw new Error(`contactProperties.create(${key}) -> ${error.message}`);
       }
@@ -101,75 +64,9 @@ export async function asegurarProperties(overrides: string[]): Promise<string[]>
     }
 
     console.log(`${PREFIJO_LOG} property creada: ${key}`);
-    creadas.push(key);
   }
 
-  const finales = await propertiesExistentes();
-  return finales;
-}
-
-/**
- * Devuelve nombre -> id de los segments indicados, creando los que falten.
- * Idempotente.
- */
-export async function asegurarSegments(
-  nombres: string[],
-): Promise<Record<string, string>> {
-  const resend = resendClient();
-  const mapa: Record<string, string> = {};
-
-  for (const nombre of nombres) {
-    const existente = await segmentPorNombre(nombre);
-
-    if (existente) {
-      mapa[nombre] = existente;
-      continue;
-    }
-
-    const { data, error } = await resend.segments.create({ name: nombre });
-    if (error) {
-      throw new Error(`segments.create(${nombre}) -> ${error.message}`);
-    }
-
-    console.log(`${PREFIJO_LOG} segment creado: ${nombre} (${data.id})`);
-    mapa[nombre] = data.id;
-  }
-
-  return mapa;
-}
-
-/**
- * Devuelve nombre -> id de los topics indicados, creando los que falten.
- * Idempotente.
- */
-export async function asegurarTopics(
-  defs: { nombre: string; descripcion: string }[],
-): Promise<Record<string, string>> {
-  const resend = resendClient();
-  const mapa: Record<string, string> = {};
-
-  for (const def of defs) {
-    const existente = await topicPorNombre(def.nombre);
-
-    if (existente) {
-      mapa[def.nombre] = existente;
-      continue;
-    }
-
-    const { data, error } = await resend.topics.create({
-      name: def.nombre,
-      description: def.descripcion,
-      defaultSubscription: "opt_in",
-    });
-    if (error) {
-      throw new Error(`topics.create(${def.nombre}) -> ${error.message}`);
-    }
-
-    console.log(`${PREFIJO_LOG} topic creado: ${def.nombre} (${data.id})`);
-    mapa[def.nombre] = data.id;
-  }
-
-  return mapa;
+  return propertiesExistentes();
 }
 
 /** Espera `ms` milisegundos. */

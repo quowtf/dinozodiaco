@@ -86,6 +86,19 @@ export async function upstashSet(key: string, value: string): Promise<void> {
   }
 }
 
+/** Escribe una key solo si no existe. Devuelve true si la escribio. */
+export async function upstashSetNx(
+  key: string,
+  value: string,
+): Promise<boolean> {
+  const json = await comando(
+    "POST",
+    `setnx/${encodeURIComponent(key)}`,
+    value,
+  );
+  return resultado(json) === 1;
+}
+
 /** Borra una key. */
 export async function upstashDel(key: string): Promise<void> {
   await comando("POST", `del/${encodeURIComponent(key)}`);

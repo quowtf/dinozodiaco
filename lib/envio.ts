@@ -7,14 +7,6 @@ import { etiquetaMes, type PrediccionMes } from "@/lib/predicciones";
  * ventana horaria y armado del contenido del correo.
  */
 
-const PREFIJO_SEGMENTO = () =>
-  process.env.PREDICCIONES_SEGMENT_PREFIX || "dinozodiaco";
-
-/** Prefijo de los segments (exportado para quitar contacts de segments viejos). */
-export function prefijoSegmento(): string {
-  return PREFIJO_SEGMENTO();
-}
-
 export function zonaHoraria(): string {
   return process.env.PREDICCIONES_ZONA || "America/Mexico_City";
 }
@@ -133,11 +125,6 @@ export function remitente(): string {
   if (!from) throw new Error("falta RESEND_FROM");
   const nombre = process.env.RESEND_FROM_NAME || "Dinozodiaco";
   return `${nombre} <${from}>`;
-}
-
-/** Nombre del segment de un signo. */
-export function nombreSegmento(slug: string): string {
-  return `${PREFIJO_SEGMENTO()}:${slug}`;
 }
 
 /**

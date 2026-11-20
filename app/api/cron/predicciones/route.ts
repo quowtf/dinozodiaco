@@ -131,8 +131,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // --- Ventana horaria (salvo force y dry) ------------------------------
-    if (!forzar && !seco) {
+    // --- Ventana horaria --------------------------------------------------
+    // No aplica a force, dry ni destino: los tres son acciones manuales.
+    // (Un destino es una prueba a un solo correo, no toca a los suscritos.)
+    const esPrueba = Boolean(body.destino);
+    if (!forzar && !seco && !esPrueba) {
       const ventana = dentroDeVentana();
       if (!ventana.dentro) {
         return Response.json({
@@ -140,6 +143,7 @@ export async function POST(request: Request) {
           enviado: false,
           motivo: ventana.motivo,
           ahoraLocal: ventana.ahoraLocal,
+          hint: "Para mandar fuera de la ventana: force=true. Para una prueba a un solo correo: destino=<email>.",
         });
       }
     }
@@ -195,9 +199,11 @@ export async function POST(request: Request) {
 
     // --- Envio de un solo correo de prueba --------------------------------
     if (body.destino) {
-      const slug = SIGNOS[0].slug;
+      // Si el destino ya es contacto, se usa SU signo para que la prueba
+      // se vea como el correo real. Si no, el primero.
+      const slug = await signoDeContacto(body.destino).catch(() => null);
       const baja = await urlBaja(body.destino, sitio);
-      const generado = armar(slug, baja);
+      const generado = armar(slug ?? SIGNOS[0].slug, baja);
 
       const resend = resendClient();
       const { data, error } = await resend.emails.send({
@@ -341,6 +347,21 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
+}
+
+/** Signo de un contacto, o null si no existe o no tiene uno valido. */
+async function signoDeContacto(email: string): Promise<string | null> {
+  const resend = resendClient();
+  const { data, error } = await resend.contacts.get({ email });
+  if (error) return null;
+
+  const properties = data.properties as
+    | Record<string, { value: unknown }>
+    | undefined;
+  const signo = properties?.signo?.value;
+
+  if (typeof signo !== "string") return null;
+  return SIGNOS.some((s) => s.slug === signo) ? signo : null;
 }
 
 /**

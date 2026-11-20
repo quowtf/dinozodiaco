@@ -67,7 +67,24 @@ function resultado(json: unknown): unknown {
 
 /** Lee una key. Devuelve null si no existe. */
 export async function upstashGet(key: string): Promise<string | null> {
-  const json = await comando("GET", `get/${encodeURIComponent(key)}`);
+  let json: unknown;
+
+  try {
+    json = await comando("GET", `get/${encodeURIComponent(key)}`);
+  } catch (error) {
+    const mensaje = error instanceof Error ? error.message : String(error);
+
+    if (mensaje.includes("WRONGTYPE")) {
+      throw new Error(
+        `la key "${key}" existe pero no es de tipo string (quedo como hash o JSON). ` +
+          `Borrala en la consola de Upstash y volve a crearla como String, ` +
+          `o subila con: pnpm predicciones:subir <archivo.json>`,
+      );
+    }
+
+    throw error;
+  }
+
   const valor = resultado(json);
 
   if (valor === null || valor === undefined) return null;

@@ -62,12 +62,25 @@ jobs:
             body="{$(IFS=,; echo "${partes[*]}")}"
           fi
 
-          echo "POST $SITE_URL/api/cron/predicciones"
+          # Normaliza SITE_URL: quita el slash final y pone https si falta.
+          # Sin esto, "http://..." o "...com/" provocan un 308 que curl no
+          # sigue, el endpoint nunca corre y la corrida sale verde.
+          sitio="${SITE_URL%/}"
+          case "$sitio" in
+            http://*|https://*) ;;
+            *) sitio="https://$sitio" ;;
+          esac
+
+          url="$sitio/api/cron/predicciones"
+          echo "POST $url"
           echo "body: $body"
 
-          # --fail-with-body: un 4xx/5xx rompe el step (si no, un 401
-          # pasa como exito y el fallo queda invisible).
-          curl -sS --fail-with-body -X POST "$SITE_URL/api/cron/predicciones" \
+          # -L sigue redirects; --fail-with-body rompe el step en 4xx/5xx
+          # (si no, un 401 pasa como exito y el fallo queda invisible);
+          # -w imprime el status final para que se vea en el log.
+          curl -sS -L --max-redirs 3 --fail-with-body \
+            -w '\nHTTP %{http_code}\n' \
+            -X POST "$url" \
             -H "Authorization: Bearer $CRON_SECRET" \
             -H "Content-Type: application/json" \
             -d "$body"

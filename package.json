@@ -17,19 +17,19 @@
     "predicciones:importar": "tsx scripts/importar-prediccion.ts"
   },
   "dependencies": {
-    "next": "16.4.2",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "resend": "^6.34.1"
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "resend": "^6.39.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.4.2",
+    "@types/node": "^24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.6",
     "tsx": "^4.23.15",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@11.9.0"
+  "packageManager": "pnpm@12.23.0"
 }

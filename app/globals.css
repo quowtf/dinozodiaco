@@ -312,17 +312,6 @@ button, input { font: inherit; color: inherit; }
   outline-offset: 4px;
 }
 
-/* ============================================================
-   Horóscopo de la semana
-   ============================================================ */
-.week {
-  background: var(--navy-deep);
-  border-block: 1px solid var(--line);
-  padding-block: clamp(2.5rem, 7vw, 4.5rem);
-}
-.week__inner { max-width: 760px; margin-inline: auto; }
-.week__dates { color: var(--muted); font-size: .9rem; margin-top: .4rem; }
-
 .chicxulub {
   margin: 2rem auto;
   max-width: 32ch;

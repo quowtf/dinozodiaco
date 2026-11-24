@@ -3,43 +3,6 @@ import { SignCard } from "@/components/sign-card";
 import { DinoWheel } from "@/components/wheel";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { SIGNOS } from "@/data/signos";
-import { prediccionDelMes, slugSignoActual } from "@/lib/predicciones";
-
-/* Predicción vigente. Si Upstash no responde o no hay mes cargado,
-   se usa el texto de respaldo de abajo para que la home nunca se caiga. */
-async function prediccionGeneral() {
-  "use cache";
-  // Revalida cada 5 minutos: al subir la prediccion del mes nuevo,
-  // la home la muestra en menos de 5 minutos sin redeploy.
-  cacheLife({ stale: 300, revalidate: 300, expire: 86400 });
-  cacheTag("predicciones");
-
-  try {
-    const datos = await prediccionDelMes(slugSignoActual());
-
-    // La general del mes es opcional: si no viene, la home usa el respaldo.
-    if (!datos.general) return null;
-
-    return {
-      titulo: datos.general.titulo,
-      texto: datos.general.texto,
-      tags: datos.general.tags,
-      edicion: datos.edicion,
-      mes: datos.mes,
-    };
-  } catch {
-    return null;
-  }
-}
-
-const PREDICCION_RESPALDO = {
-  titulo: "Mes de impacto",
-  texto:
-    "Mes de impacto. El cielo trae ganas de empezar cosas y poca paciencia para lo que ya no sirve. Los de tierra sostienen, los de fuego arrancan, los de aire proponen y los de agua sienten todo al doble. Si algo se va a caer, que caiga este mes: después queda el terreno libre para lo nuevo. Revisa a las 6:06 de la tarde si ya cayó.",
-  tags: ["Energía de arranque", "Mes para soltar", "Revisa a las 6:06 pm"],
-  edicion: 2,
-  mes: "",
-};
 
 const NOMBRES_MES = [
   "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -52,8 +15,6 @@ function etiquetaMes(mes: string): string {
 }
 
 export default async function Home() {
-  const cargada = await prediccionGeneral();
-  const vigente = cargada ?? PREDICCION_RESPALDO;
 
   return (
     <main id="contenido">
@@ -77,44 +38,6 @@ export default async function Home() {
           <div className="hero__wheel">
             <DinoWheel />
           </div>
-        </div>
-      </section>
-
-      {/* ===== HORÓSCOPO DEL MES ===== */}
-      <section className="week" id="semana" aria-labelledby="week-title">
-        <div className="wrap week__inner">
-          <header className="section-head section-head--center">
-            <p className="kicker">Predicción mensual</p>
-            <h2 className="section-title" id="week-title">Lo de este mes</h2>
-            <p className="week__dates">
-              {vigente.mes
-                ? `${etiquetaMes(vigente.mes)} · Edición n.º ${vigente.edicion}`
-                : "Octubre · Edición n.º 2"}
-            </p>
-          </header>
-
-          <blockquote className="chicxulub">
-            <p>Son las 6:06, la hora Chicxulub. Lo que leas ahora cae con fuerza de meteorito.</p>
-          </blockquote>
-
-          <article className="week-card">
-            <div className="week-card__top">
-              <span className="tag tag--gold">Predicción general</span>
-              <span className="week-card__icon" aria-hidden="true">☄</span>
-            </div>
-            <p className="week-card__forecast">
-              {vigente.texto}
-            </p>
-            <ul className="week-card__tags">
-              {vigente.tags.map((tag) => (
-                <li key={tag}>{tag}</li>
-              ))}
-            </ul>
-          </article>
-
-          <p className="week__note">
-            Nueva predicción cada mes.
-          </p>
         </div>
       </section>
 

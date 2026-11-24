@@ -11,7 +11,7 @@ export function SiteHeader() {
         </Link>
 
         <nav className="site-nav" aria-label="Navegación principal">
-          <Link href="/#semana">Este mes</Link>
+          <Link href="https://www.instagram.com/dinozodiaco" target="_blank" rel="noopener noreferrer">Instagram</Link>
           <Link href="/#ritual">La hora 6:06</Link>
           <Link href="/#signos">Los 12 signos</Link>
           <Link href="/tienda">Tienda</Link>
